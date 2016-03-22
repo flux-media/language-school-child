@@ -1,0 +1,37 @@
+/*
+Theme Name: Language School Child
+Theme URI: http://cmsmasters.net/language-school-child/
+Author: leehankyeol
+Author URI: http://leehankyeol.me/
+Description: Language School Wordpress Theme is amazing. Unlimited design solutions can be created due to a great flexibility of settings and shortcode options. 99+ Custom Shortcodes are added through a Visual content composer with  drag'n'drop function. You can set a completely custom layout that stretches to any width, set your content in many columnns and assign animation many parts of your content. Language School theme has a Portfolio that can be set to any sort of a grid or a Masonry puzzle with variable paddings for elemens, while Blog can have several different layouts too. Custom Profiles and Projects post types offer an optimal way to present your content, while valid code, SEO-optimized structure and microformats guarantee this content is easily crawled and indexed by search engines. Language School comes with a Custom Mega Menu plugin, a really functional Form Builder and premium Revolution and Layer Slider plugins included for free. Multilanguage, RTL-ready, plugin-compatible and professionally-supported theme will make every day you work with your website be a Language School!
+Version: 0.0.1
+Template: language-school
+License:
+License URI:
+Text Domain: language-school-child
+Domain Path: /framework/languages
+Tags: white, light, dark, one-column, two-columns, three-columns, four-columns, left-sidebar, right-sidebar, fixed-layout, responsive-layout, custom-background, custom-colors, custom-header, custom-menu, editor-style, featured-image-header, featured-images, flexible-header, full-width-template, microformats, post-formats, rtl-language-support, sticky-post, theme-options, threaded-comments, translation-ready
+*/
+
+.cmsmasters_learnpress_shortcode.cmsmasters_4 .lpr_course_post {
+	width: 24.9% !important;
+}
+@media only screen and (max-width: 950px) {
+	.cmsmasters_learnpress_shortcode.cmsmasters_4 .lpr_course_post {
+	    width: 50% !important;
+	}
+}
+@media only screen and (max-width: 540px) {
+	.cmsmasters_learnpress_shortcode.cmsmasters_4 .lpr_course_post {
+		width: 100% !important;
+	}
+}
+
+.cmsmasters_img_link.preloader {
+	height: 100%;
+	padding-bottom: 0 !important;
+}
+
+.preloader .full-width {
+	position: static !important;
+}
