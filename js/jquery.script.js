@@ -37,8 +37,11 @@ jQuery(document).ready(function() {
 });
 
 function doMasonry() {
-	jQuery('.cmsmasters_learnpress_shortcode').masonry({
+	var $shortCode = jQuery('.cmsmasters_learnpress_shortcode').masonry({
 		itemSelector: '.lpr_course_post'
+	});
+	$shortCode.imagesLoaded().progress(function() {
+		$shortCode.masonry('layout');
 	});
 }
 

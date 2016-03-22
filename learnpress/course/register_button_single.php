@@ -19,8 +19,8 @@ if ( ( '' == $course_status ) ) {
 do_action( 'learn_press_before_course_register_button' );
 $button_text = apply_filters( 'learn_press_take_course_button_text', esc_html__( 'Take this course', 'learn_press' ) );
 ?>
-<div class="cmsmasters_course_meta_item">
-	<a href="<?php echo esc_url(site_url('register-for-courses?title=' . urlencode(get_the_title()) . '&price=' . urlencode(learn_press_get_course_price( null, true )) . '&course_id=' . urlencode(get_the_ID()) )); ?>" class="btn take-course" data-course-id="<?php the_ID();?>"><?php echo $button_text;?></a>
+<div class="cmsmasters_course_meta_item text-align-center">
+	<a href="<?php echo esc_url(site_url('register-for-courses?title=' . urlencode(get_the_title()) . '&price=' . urlencode(learn_press_get_course_price( null, true )) . '&course_id=' . urlencode(get_the_ID()) )); ?>" class="btn take-course cmsmasters_button"><?php echo $button_text;?></a>
 </div>
 <?php do_action( 'learn_press_after_course_register_button' );?>
 

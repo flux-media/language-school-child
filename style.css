@@ -27,6 +27,11 @@ Tags: white, light, dark, one-column, two-columns, three-columns, four-columns, 
 	}
 }
 
+.cmsmasters_learnpress_shortcode .lpr_course_post .cmsmasters_course_price {
+	background-color: #01a2a6;
+	color: white;
+}
+
 .cmsmasters_img_link.preloader {
 	height: 100%;
 	padding-bottom: 0 !important;
@@ -34,4 +39,8 @@ Tags: white, light, dark, one-column, two-columns, three-columns, four-columns, 
 
 .preloader .full-width {
 	position: static !important;
+}
+
+.text-align-center {
+	text-align: center;
 }

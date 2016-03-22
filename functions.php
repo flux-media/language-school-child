@@ -17,6 +17,7 @@ function theme_enqueue_styles() {
 add_action( 'wp_enqueue_scripts', 'theme_enqueue_scripts');
 function theme_enqueue_scripts() {
 	wp_enqueue_script('masonry');
+	wp_enqueue_script('imagesLoaded', get_stylesheet_directory_uri(). '/js/imagesloaded.pkgd.min.js', array('masonry'), false, true);
 	wp_enqueue_script('child_script', get_stylesheet_directory_uri() . '/js/jquery.script.js', array('jquery'), false, true);
 }
 
@@ -121,44 +122,16 @@ function my_cmsmasters_learnpress($atts, $content = null) {
 			} else {
 				$out .= "<div class=\"cmsmasters_course_free\">" . esc_html__('Free', 'language-school') . "</div>";
 			}
-			
-			if ( function_exists( 'learn_press_print_rate' ) ) {
-				
-				$course_rate = learn_press_get_course_rate( $course_id );
-				
-				$out .= "<div class=\"review-stars-rated\">
-					<ul class=\"review-stars\">
-						<li><span class=\"dashicons dashicons-star-empty\"></span> </li>
-						<li><span class=\"dashicons dashicons-star-empty\"></span> </li>
-						<li><span class=\"dashicons dashicons-star-empty\"></span> </li>
-						<li><span class=\"dashicons dashicons-star-empty\"></span> </li>
-						<li><span class=\"dashicons dashicons-star-empty\"></span> </li>
-					</ul>
-					<ul class=\"review-stars filled\"  style=\"width:" . $course_rate*20 . "%;\">
-						<li><span class=\"dashicons dashicons-star-filled\"></span> </li>
-						<li><span class=\"dashicons dashicons-star-filled\"></span> </li>
-						<li><span class=\"dashicons dashicons-star-filled\"></span> </li>
-						<li><span class=\"dashicons dashicons-star-filled\"></span> </li>
-						<li><span class=\"dashicons dashicons-star-filled\"></span> </li>
-					</ul>
-				</div>";
+
+			if ($term_list != '') {
+				$out .= "<div class=\"entry-meta cmsmasters_cource_cat\">" . $term_list . "</div>";
 			}
+			
+			// Removed rate.
 			
 			$out .= "</div>" . "\n";
 			
-			if ($course_duration != '' || $course_duration != '') {
-				$out .= "<footer class=\"cmsmasters_course_footer\">" . "\n";
-				
-				if ($course_duration != '') {
-					$out .= "<div class=\"cmsmasters_cource_duration\">" . $course_duration . ' ' . (($course_duration == '1') ? esc_html__('week', 'language-school') : esc_html__('weeks', 'language-school')) . "</div>";
-				}
-				
-				if ($term_list != '') {
-					$out .= "<div class=\"entry-meta cmsmasters_cource_cat\">" . $term_list . "</div>";
-				} 
-				
-				$out .= "</footer>" . "\n";
-			}
+			// Removed footer.
 			
 		$out .= "</article>" . "\n";
 	
