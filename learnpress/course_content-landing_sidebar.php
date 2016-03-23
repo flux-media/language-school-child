@@ -16,7 +16,7 @@ if ( !defined( 'ABSPATH' ) ) {
 <?php 
 	learn_press_get_template( 'course/price_single.php' );
 	
-	// learn_press_get_template( 'course/students_single.php' );
+	learn_press_get_template( 'course/students_single.php' );
 	
 	// learn_press_get_template( 'course/duration_single.php' );
 	

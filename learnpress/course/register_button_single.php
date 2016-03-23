@@ -17,7 +17,7 @@ $course_status = learn_press_get_user_course_status();
 if ( ( '' == $course_status ) ) {
 
 do_action( 'learn_press_before_course_register_button' );
-$button_text = apply_filters( 'learn_press_take_course_button_text', esc_html__( 'Take this course', 'learn_press' ) );
+$button_text = apply_filters( 'learn_press_take_course_button_text', esc_html__( 'Take this course', 'language-school-child' ) );
 ?>
 <div class="cmsmasters_course_meta_item text-align-center">
 	<a href="<?php echo esc_url(site_url('register-for-courses?title=' . urlencode(get_the_title()) . '&price=' . urlencode(learn_press_get_course_price( null, true )) . '&course_id=' . urlencode(get_the_ID()) )); ?>" class="btn take-course cmsmasters_button"><?php echo $button_text;?></a>

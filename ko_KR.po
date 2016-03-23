@@ -1,0 +1,39 @@
+# Language School Child.
+# Copyright (C) 2016 Flux Media.
+# This file is distributed under the same license as the PACKAGE package.
+# Lee Han Kyeol <hankyeol@ppss.kr>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-23 14:04+0900\n"
+"PO-Revision-Date: 2016-03-23 14:05+0900\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: ko_KR\n"
+
+#: learnpress/course/price_single.php:17
+msgid "Price"
+msgstr "수강료"
+
+#: learnpress/course/categories_single.php:18
+msgid "Categories"
+msgstr "카테고리"
+
+#: learnpress/course/students_single.php:14
+msgid "Students"
+msgstr "등록현황"
+
+#: learnpress/course/register_button_single.php:20
+msgid "Take this course"
+msgstr "수강신청"
+
+#: learnpress/course/contact_button_single.php:20
+msgid "Contact"
+msgstr "문의"

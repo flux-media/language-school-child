@@ -9,6 +9,11 @@
  * 
  */
 
+add_action('after_setup_theme', 'child_theme_setup');
+function child_theme_setup() {
+        load_child_theme_textdomain('language-school-child', get_stylesheet_directory().'/');
+}
+
 add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
 function theme_enqueue_styles() {
     wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
