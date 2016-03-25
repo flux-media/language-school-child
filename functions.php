@@ -109,6 +109,7 @@ function my_cmsmasters_learnpress($atts, $content = null) {
 		$course_duration = get_post_meta( $course_id, '_lpr_course_duration', true );
 		$term_list = get_the_term_list( $course_id, 'course_category', '', ', ', '' );
 		$cmsmasters_title = cmsmasters_child_title($course_id, false);
+		$posttags = get_the_term_list( $course_id, 'course_tag', '', ', ', '' );
 		
 		$out .= "<article class=\"lpr_course_post\">" . "\n" .
 			 "<a href=" . get_the_permalink( $course_id ) . ">" .
@@ -121,23 +122,30 @@ function my_cmsmasters_learnpress($atts, $content = null) {
 			"<header class=\"entry-header lpr_course_header\">
 				<h6 class=\"entry-title lpr_course_title\"><a href=" . get_the_permalink( $course_id ) . ">" . get_the_title( $course_id ) . "</a></h6>
 			</header>" . "\n";
-			
-			if ( !learn_press_is_free_course( $course_id ) ) {
-				$out .= "<div class=\"cmsmasters_course_price\">" . learn_press_get_currency_symbol() . floatval( get_post_meta( $course_id, '_lpr_course_price', true ) ) . "</div>";
-			} else {
-				$out .= "<div class=\"cmsmasters_course_free\">" . esc_html__('Free', 'language-school') . "</div>";
-			}
 
-			if ($term_list != '') {
-				$out .= "<div class=\"entry-meta cmsmasters_cource_cat\">" . $term_list . "</div>";
-			}
+		$out .= "<div><div class=\"lpr_course_author\">" . get_the_author_meta('last_name') . get_the_author_meta('first_name') . "</div>";
+		if ($posttags != '') {
+			$out .= "<div class=\"lpr_course_date\">" . $posttags . "</div>";
+		} else {
+			$out .= "<div class=\"lpr_course_date\">날짜 미정</div>";
+		}
+		$out .= "<div class=\"lpr_course_subtitle\">" . nl2br(get_the_excerpt( $course_id )) . "</div>";
+		$out .= "</div>";
 			
-			// Removed rate.
-			
-			$out .= "</div>" . "\n";
-			
-			// Removed footer.
-			
+		if ( !learn_press_is_free_course( $course_id ) ) {
+			$out .= "<div class=\"cmsmasters_course_price\">" . learn_press_get_currency_symbol() . floatval( get_post_meta( $course_id, '_lpr_course_price', true ) ) . "</div>";
+		} else {
+			$out .= "<div class=\"cmsmasters_course_free\">" . esc_html__('Free', 'language-school') . "</div>";
+		}
+
+		if ($term_list != '') {
+			$out .= "<div class=\"entry-meta cmsmasters_cource_cat\">" . $term_list . "</div>";
+		}
+		
+		// Removed rate.
+		$out .= "</div>" . "\n";
+		
+		// Removed footer.	
 		$out .= "</article>" . "\n";
 	
 		endwhile;

@@ -13,6 +13,12 @@ Domain Path: /framework/languages
 Tags: white, light, dark, one-column, two-columns, three-columns, four-columns, left-sidebar, right-sidebar, fixed-layout, responsive-layout, custom-background, custom-colors, custom-header, custom-menu, editor-style, featured-image-header, featured-images, flexible-header, full-width-template, microformats, post-formats, rtl-language-support, sticky-post, theme-options, threaded-comments, translation-ready
 */
 
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+body {
+	font-family: 'Nanum Gothic', sans-serif !important;
+}
+
 .cmsmasters_learnpress_shortcode.cmsmasters_4 .lpr_course_post {
 	width: 24.9% !important;
 }
@@ -44,3 +50,118 @@ Tags: white, light, dark, one-column, two-columns, three-columns, four-columns, 
 .text-align-center {
 	text-align: center;
 }
+
+.lpr_course_author {
+	float: left;
+	margin-bottom: 1em;
+}
+
+.lpr_course_date {
+	float: right;
+}
+
+.lpr_course_subtitle {
+	clear: both;
+	margin-bottom: 1em;
+}
+
+/* For main page slider */
+.full-width .cmsmasters_row_inner {
+	width: 100%;
+	padding: 0;
+}
+
+#header {
+	box-shadow: none;
+	-webkit-box-shadow: none;
+}
+
+.header_mid {
+	padding: 1em;
+}
+
+#page.cmsmasters_heading_after_header #middle {
+	/*padding-top: 190px !important;*/
+}
+
+.entry-header h2 {
+	font-size: 36px;
+	font-weight: 700;
+}
+
+.course-description h3 {
+	font-size: 24px;
+	font-weight: 700;
+}
+
+.course-description p {
+	font-size: 18px;
+	color: #3d3d47;
+    line-height: 1.675;
+}
+
+.cmsmasters_profile.vertical .profile {
+	border: 0;
+	padding: 0;
+}
+
+.cmsmasters_profile.vertical .profile:before {
+	display: none;
+}
+
+.cmsmasters_profile.vertical .profile .pl_img {
+	width: 19%;
+	padding: 0 25px 0 0;
+	vertical-align: top;
+}
+
+.cmsmasters_profile.vertical .profile .entry-title a {
+	font-size: 18px;
+}
+
+.cmsmasters_profile.vertical .profile .pl_social {
+	display: inline;
+	margin: 0 0 0 5px;
+}
+
+.cmsmasters_profile.vertical .profile.shortcode_animated .pl_social .pl_social_list {
+	display: inline;
+}
+
+.cmsmasters_profile.vertical .profile .pl_content {
+	display: block;
+	padding: 0;
+	width: 100%;
+}
+
+.cmsmasters_profile.vertical .profile .entry-content {
+	width: 100%;
+	display: block;
+	color: #3d3d47;
+	font-size: 18px;
+	line-height: 1.675;
+}
+
+.cmsmasters_tabs.tabs_mode_tab .cmsmasters_tabs_list .cmsmasters_tabs_list_item {
+	width: 20%;
+}
+
+.cmsmasters_tabs .cmsmasters_tabs_list .cmsmasters_tabs_list_item > a {
+	font-size: 16px !important;
+}
+
+@media only screen and (max-width: 768px) {
+	.cmsmasters_tabs.tabs_mode_tab .cmsmasters_tabs_list .cmsmasters_tabs_list_item {
+		width: 100%;
+	}	
+}
+
+.cmsmasters_learnpress_shortcode .lpr_course_post .lpr_course_inner {
+	padding: 15px 15px 20px !important;
+}
+
+.lpr_course_inner h6 a {
+    font-size: 22px !important;
+    line-height: 1.25 !important;
+}
+
