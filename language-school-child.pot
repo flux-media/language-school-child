@@ -35,3 +35,7 @@ msgstr ""
 #: learnpress/course/contact_button_single.php:20
 msgid "Contact"
 msgstr ""
+
+#: learnpress/course/tags_single.php:18
+msgid "Tags"
+msgstr ""
