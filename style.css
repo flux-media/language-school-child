@@ -335,3 +335,10 @@ html .bottom_bg {
 	padding: 0;
 }
 
+.sticky {
+	width: 291px !important;
+	position: fixed !important;
+	top: 5%;
+	right: 16%;
+}
+

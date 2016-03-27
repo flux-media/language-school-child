@@ -34,7 +34,36 @@ jQuery(document).ready(function() {
 		}
 		jQuery('#avengerschool-course-title').val('강의명: ' + courseId + '. ' + title);
 	}
+
+	/* Sticky */
+	var $sidebar = jQuery('.cmsmasters_course_sidebar'), width;
+	if ($sidebar.length > 0) {
+		doSticky();
+		jQuery(window).resize(doSticky);
+		jQuery(window).scroll(doSticky);
+	}
 });
+
+function doSticky() {
+	var $sidebar = jQuery('.cmsmasters_course_sidebar'),
+		$window = jQuery(window),
+		windowWidth = $window.width(),
+		scrollTop = $window.scrollTop(),
+		containerWidth = jQuery('.middle_inner').width(),
+		margin = 120;
+	if (windowWidth > 950 && scrollTop > 200) {
+		if (windowWidth < 1200) {
+			margin = 30;
+		} else {
+			margin = 120;
+		}
+		$sidebar.addClass('sticky');
+		$sidebar.css('right', ((windowWidth - containerWidth) / 2 + margin) + 'px');
+	} else {
+		$sidebar.removeClass('sticky');
+		$sidebar.css('right', 'auto');
+	}
+}
 
 function doMasonry() {
 	var $shortCode = jQuery('.cmsmasters_learnpress_shortcode').masonry({
