@@ -123,7 +123,7 @@ function my_cmsmasters_learnpress($atts, $content = null) {
 				<h6 class=\"entry-title lpr_course_title\"><a href=" . get_the_permalink( $course_id ) . ">" . get_the_title( $course_id ) . "</a></h6>
 			</header>" . "\n";
 
-		$out .= "<div><div class=\"lpr_course_author\">" . get_the_author_meta('last_name') . get_the_author_meta('first_name') . "</div>";
+		$out .= "<div><div class=\"lpr_course_author\">" . get_the_author_meta('nickname') . "</div>";
 		if ($posttags != '') {
 			$out .= "<div class=\"lpr_course_date\">" . $posttags . "</div>";
 		} else {
@@ -133,7 +133,7 @@ function my_cmsmasters_learnpress($atts, $content = null) {
 		$out .= "</div>";
 			
 		if ( !learn_press_is_free_course( $course_id ) ) {
-			$out .= "<div class=\"cmsmasters_course_price\">" . learn_press_get_currency_symbol() . floatval( get_post_meta( $course_id, '_lpr_course_price', true ) ) . "</div>";
+			$out .= "<div class=\"cmsmasters_course_price\">" . learn_press_get_currency_symbol() . number_format(floatval( get_post_meta( $course_id, '_lpr_course_price', true ) ) ) . "</div>";
 		} else {
 			$out .= "<div class=\"cmsmasters_course_free\">" . esc_html__('Free', 'language-school') . "</div>";
 		}

@@ -20,7 +20,8 @@ do_action( 'learn_press_before_course_contact_button' );
 $button_text = apply_filters( 'learn_press_contact_button_text', esc_html__( 'Contact', 'language-school-child' ) );
 ?>
 <div class="cmsmasters_course_meta_item text-align-center">
-	<a href="<?php echo esc_url(site_url('contact-us')); ?>" class="btn cmsmasters_button"><?php echo $button_text;?></a>
+	<a href="<?php echo esc_url(site_url('contact-us')); ?>"
+		class="btn contact-button cmsmasters_button cmsmasters_but_bg_slide_left"><?php echo $button_text;?></a>
 </div>
 <?php do_action( 'learn_press_after_course_contact_button' );?>
 

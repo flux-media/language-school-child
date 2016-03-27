@@ -20,11 +20,16 @@ body {
 }
 
 .cmsmasters_learnpress_shortcode.cmsmasters_4 .lpr_course_post {
-	width: 24.9% !important;
+	width: 33.3% !important;
+}
+@media only screen and (max-width: 1619px) {
+	.cmsmasters_learnpress_shortcode.cmsmasters_4 .lpr_course_post {
+		width: 33.3% !important;
+	}
 }
 @media only screen and (max-width: 950px) {
 	.cmsmasters_learnpress_shortcode.cmsmasters_4 .lpr_course_post {
-	    width: 50% !important;
+	    width: 49.9% !important;
 	}
 }
 @media only screen and (max-width: 540px) {
@@ -100,6 +105,11 @@ body {
     line-height: 1.675;
 }
 
+.cmsmasters_profile.vertical {
+	border-top: 2px solid gainsboro;
+    padding-top: 40px;
+}
+
 .cmsmasters_profile.vertical .profile {
 	border: 0;
 	padding: 0;
@@ -142,6 +152,12 @@ body {
 	line-height: 1.675;
 }
 
+@media only screen and (max-width: 768px) {
+	html #page .cmsmasters_profile.vertical .profile .entry-content {
+		text-align: left !important;
+	}
+}
+
 .cmsmasters_tabs.tabs_mode_tab .cmsmasters_tabs_list .cmsmasters_tabs_list_item {
 	width: 20%;
 }
@@ -163,5 +179,159 @@ body {
 .lpr_course_inner h6 a {
     font-size: 22px !important;
     line-height: 1.25 !important;
+}
+
+@media only screen and (max-width: 330px) {
+	html #header .header_mid .header_mid_inner {
+		width: 95% !important;
+	}
+	.header_mid .logo_wrap {
+		position: static !important;
+	}
+	.header_mid .logo_wrap .logo img {
+		bottom: auto;
+	}
+}
+
+.header_mid .resp_mid_nav_wrap .resp_mid_nav {
+	width: 45px;
+	height: 30px;
+}
+
+.header_mid .resp_mid_nav_wrap .resp_mid_nav:before {
+    top: 12px;
+    width: 45px;
+}
+
+@media only screen and (max-width: 540px) {
+	html #page .cmsmasters_profile.vertical .profile .pl_img {
+		width: 45% !important;
+	}
+}
+
+.take-course.cmsmasters_button {
+	background-color: #01a2a6 !important;
+	color: white !important;
+}
+
+.take-course.cmsmasters_button:hover {
+	background-color: white !important;
+    color: #01a2a6 !important;
+    border-color: #01a2a6 !important;
+}
+
+.contact-button.cmsmasters_button:hover {
+	background-color: white !important;
+    color: #01a2a6 !important;
+    border-color: #01a2a6 !important;
+}
+
+.cmsmasters_course_sidebar {
+	font-size: 18px;
+}
+.cmsmasters_course_sidebar a {
+	font-size: 18px;
+}
+
+.contactus-email {
+	float: left;
+	width: 20%;
+	margin-right: 5%;
+}
+.contactus-name {
+	float: left;
+	width: 10%;
+	margin-right: 5%;
+}
+.contactus-title {
+	float: left;
+	width: 60%;
+}
+.contactius-content, .register-content {
+	clear: both;
+}
+
+@media only screen and (max-width: 768px) {
+	.contactus-email, .contactus-name, .contactus-title {
+		width: 100%;
+		margin: 0;
+		float: none;
+	}
+}
+
+.register-name {
+	float: left;
+	width: 15%;
+	margin-right: 5%;
+}
+
+.register-email {
+	float: left;
+	width: 20%;
+	margin-right: 5%;
+}
+
+.register-phone-number {
+	float: left;
+	width: 20%;
+	margin-right: 5%;
+}
+
+.register-course-name {
+	float: left;
+	width: 30%;
+}
+
+@media only screen and (max-width: 768px) {
+	.register-email, .register-name, .register-phone-number, .register-course-name {
+		width: 100%;
+		margin: 0;
+		float: none;
+	}
+}
+
+.lrp-form {
+    padding-top: 20px;
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+.fixed_header #header {
+	position: static;
+}
+
+#page.cmsmasters_heading_after_header #middle {
+	padding: 0 !important;
+}
+
+@media only screen and (max-width: 1024px) {
+	html #header .header_mid .resp_mid_nav_wrap {
+		display: none !important;
+	}
+	html #header .header_mid .mid_nav_wrap nav {
+		display: block !important;
+	}
+	.cmsmasters_heading_wrap {
+		margin-top: 0 !important;
+	}
+}
+
+@media only screen and (max-width: 540px) {
+	.main-slider {
+		display: none;
+	}
+}
+
+html .cmsmasters_color_scheme_bottom a {
+	color: white !important;
+	font-size: 16px;
+}
+
+html .bottom_bg {
+	padding: 2em;
+}
+
+.widget {
+	padding: 0;
 }
 
