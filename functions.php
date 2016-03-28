@@ -131,6 +131,7 @@ function my_cmsmasters_learnpress($atts, $content = null) {
 			
 		if ( !learn_press_is_free_course( $course_id ) ) {
 			$out .= "<div class=\"cmsmasters_course_price\">" . learn_press_get_currency_symbol() . number_format(floatval( get_post_meta( $course_id, '_lpr_course_price', true ) ) ) . "</div>";
+			$out .= "<div class=\"cmsmasters_course_price original_price\"><span class=\"line-through\">₩". number_format(get_post_meta( get_the_ID(), '_lpr_course_duration', true )) . "</span> →</div>";
 		} else {
 			$out .= "<div class=\"cmsmasters_course_free\">" . esc_html__('Free', 'language-school') . "</div>";
 		}

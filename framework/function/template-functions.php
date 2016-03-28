@@ -355,7 +355,8 @@ function language_school_logo() {
 			'</a>' . "\n";
 			
 			
-			$logo_def_style_width = (int) ($header_mid_height * (231 / 30));
+			$logo_def_style_width = (int) ($header_mid_height * (400 / 159));
+			$logo_def_style_width = 310;
 			
 			
 			echo "
@@ -383,9 +384,9 @@ function language_school_logo() {
 			}
 			
 			
-			$logo_img_width = ((is_numeric($logo_img[0])) ? (int) $logo_img_url[1] : '231');
+			$logo_img_width = ((is_numeric($logo_img[0])) ? (int) $logo_img_url[1] : '400');
 			
-			$logo_img_height = ((is_numeric($logo_img[0])) ? (int) $logo_img_url[2] : '30');
+			$logo_img_height = ((is_numeric($logo_img[0])) ? (int) $logo_img_url[2] : '159');
 			
 			
 			if ($logo_img_height >= $header_mid_height) {
@@ -393,7 +394,7 @@ function language_school_logo() {
 			} else {
 				$logo_style_width = $logo_img_width;
 			}
-			
+			$logo_style_width = 310;
 			
 			echo "
 <style type=\"text/css\">
@@ -415,9 +416,9 @@ function language_school_logo() {
 					$logo_img_retina_url = wp_get_attachment_image_src((int) $logo_img_retina[0], 'full');
 				}
 				
-				$logo_img_retina_width = ((is_numeric($logo_img_retina[0])) ? ((int) $logo_img_retina_url[1] / 2) : '231');
+				$logo_img_retina_width = ((is_numeric($logo_img_retina[0])) ? ((int) $logo_img_retina_url[1] / 2) : '400');
 				
-				$logo_img_retina_height = ((is_numeric($logo_img_retina[0])) ? ((int) $logo_img_retina_url[2] / 2) : '30');
+				$logo_img_retina_height = ((is_numeric($logo_img_retina[0])) ? ((int) $logo_img_retina_url[2] / 2) : '159');
 				
 				
 				echo "

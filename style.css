@@ -59,6 +59,7 @@ body {
 .lpr_course_author {
 	float: left;
 	margin-bottom: 1em;
+	color: #3d3d47;
 }
 
 .lpr_course_date {
@@ -68,6 +69,7 @@ body {
 .lpr_course_subtitle {
 	clear: both;
 	margin-bottom: 1em;
+	color: #3d3d47;
 }
 
 /* For main page slider */
@@ -189,6 +191,14 @@ body {
     line-height: 1.25 !important;
 }
 
+.header_mid {
+	padding-top: 40px;
+}
+
+.header_mid .header_mid_inner .logo_wrap {
+	width: 294px !important;
+}
+
 @media only screen and (max-width: 330px) {
 	html #header .header_mid .header_mid_inner {
 		width: 95% !important;
@@ -199,6 +209,10 @@ body {
 	.header_mid .logo_wrap .logo img {
 		bottom: auto;
 	}
+}
+
+.header_mid .logo_wrap {
+	float: right;
 }
 
 .header_mid .resp_mid_nav_wrap .resp_mid_nav {
@@ -362,4 +376,9 @@ span.bold {
 
 span.line-through {
 	text-decoration: line-through;
+}
+
+.cmsmasters_learnpress_shortcode .lpr_course_post .cmsmasters_course_price.original_price {
+	background-color: white;
+	color: #3d3d47;
 }
