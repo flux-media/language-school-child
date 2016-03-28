@@ -21,7 +21,7 @@ jQuery(document).ready(function() {
 	var $pricing = jQuery('.cmsmasters_price_wrap'),
 		title, price, courseId;
 	if ($pricing.length > 0) {
-		title = getURLParameter('title');
+		title = decodeHtml(getURLParameter('title'));
 		price = getURLParameter('price');
 		courseId = getURLParameter('course_id');
 		if (price === 'Free') {
@@ -84,4 +84,11 @@ function doMasonry() {
 // http://stackoverflow.com/questions/11582512/how-to-get-url-parameters-with-javascript/11582513#11582513
 function getURLParameter(name) {
 	return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [, ""])[1].replace(/\+/g, '%20')) || null;
+}
+
+// http://stackoverflow.com/questions/7394748/whats-the-right-way-to-decode-a-string-that-has-special-html-entities-in-it?lq=1
+function decodeHtml(html) {
+    var txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
 }
