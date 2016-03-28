@@ -34,7 +34,6 @@ jQuery(document).ready(function() {
 		}
 		jQuery('#avengerschool-course-title').val('강의명: ' + courseId + '. ' + title);
 	}
-	
 
 	/* Sticky */
 	var $sidebar = jQuery('.cmsmasters_course_sidebar'), width;
@@ -43,6 +42,11 @@ jQuery(document).ready(function() {
 		jQuery(window).resize(doSticky);
 		jQuery(window).scroll(doSticky);
 	}
+
+	/* Form */
+	jQuery('.wpcf7').on('wpcf7:submit', function(event) {
+		// jQuery('#avengerschool-course-title').val('강의명: ' + courseId + '. ' + title);	
+	});
 });
 
 function doSticky() {
@@ -55,7 +59,7 @@ function doSticky() {
 	if (windowWidth > 950 && scrollTop > 200) {
 		if (windowWidth < 1200) {
 			margin = 30;
-		} else if (windowWidth < 1600) {
+		} else if (windowWidth <= 1600) {
 			margin = 120;
 		} else {
 			margin = 221;
