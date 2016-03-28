@@ -70,6 +70,7 @@ body {
 	clear: both;
 	margin-bottom: 1em;
 	color: #3d3d47;
+	font-weight: bold;
 }
 
 /* For main page slider */
@@ -381,4 +382,8 @@ span.line-through {
 .cmsmasters_learnpress_shortcode .lpr_course_post .cmsmasters_course_price.original_price {
 	background-color: white;
 	color: #3d3d47;
+}
+
+.cmsmasters_learnpress_shortcode .lpr_course_post .lpr_course_title {
+	min-height: 54px;
 }
