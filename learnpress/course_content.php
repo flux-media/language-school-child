@@ -55,7 +55,7 @@
 					</div>
 					<div class="pl_content">
 						<h2 class="entry-title">
-							<a>강연자: <?php echo get_the_author_meta('nickname'); ?></a>
+							<a>강연자: <span class="bold"><?php echo get_the_author_meta('nickname'); ?></span></a>
 							<div class="pl_social">
 								<ul class="pl_social_list">
 									<?php if ($user_url): ?>

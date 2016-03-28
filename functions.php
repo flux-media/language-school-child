@@ -110,17 +110,14 @@ function my_cmsmasters_learnpress($atts, $content = null) {
 		$term_list = get_the_term_list( $course_id, 'course_category', '', ', ', '' );
 		$cmsmasters_title = cmsmasters_child_title($course_id, false);
 		$posttags = get_the_term_list( $course_id, 'course_tag', '', ', ', '' );
-		
+
 		$out .= "<article class=\"lpr_course_post\">" . "\n" .
 			 "<a href=" . get_the_permalink( $course_id ) . ">" .
-				 get_the_post_thumbnail($course_id, (($type) ? $type : 'full'), array( 
-					'class' => 'full-width', 
-					'alt' => $cmsmasters_title, 
-					'title' => $cmsmasters_title 
-				)) . "</a>" . "\n" . 
+			  "<img class=\"full-width heyho\" src=\"" . wp_get_attachment_image_url(get_post_thumbnail_id($course_id), 'medium') .
+			  "\" title=\"" . $cmsmasters_title . "\" alt=\"" . $cmsmasters_title . "\" " . wp_get_attachment_image_srcset(get_post_thumbnail_id($course_id)) . "/>" . "\n" .
 			"<div class=\"lpr_course_inner\">" . "\n" . 
 			"<header class=\"entry-header lpr_course_header\">
-				<h6 class=\"entry-title lpr_course_title\"><a href=" . get_the_permalink( $course_id ) . ">" . get_the_title( $course_id ) . "</a></h6>
+			<h6 class=\"entry-title lpr_course_title\"><a href=" . get_the_permalink( $course_id ) . ">" . get_the_title( $course_id ) . "</a></h6>
 			</header>" . "\n";
 
 		$out .= "<div><div class=\"lpr_course_author\">" . get_the_author_meta('nickname') . "</div>";
