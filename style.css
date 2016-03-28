@@ -351,3 +351,7 @@ html .bottom_bg {
 span.bold {
 	font-weight: bold;
 }
+
+span.line-through {
+	text-decoration: line-through;
+}
