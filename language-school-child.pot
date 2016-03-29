@@ -39,3 +39,7 @@ msgstr ""
 #: learnpress/course/tags_single.php:18
 msgid "Tags"
 msgstr ""
+
+#: learnpress/course/classroom_single.php:18
+msgid "Classroom"
+msgstr ""

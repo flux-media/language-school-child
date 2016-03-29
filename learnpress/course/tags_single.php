@@ -14,7 +14,7 @@ if( $tags ) {
 ?>
 <div class="cmsmasters_course_meta_item">
 	<div class="cmsmasters_course_meta_title">
-		<span class="cmsmasters_theme_icon_lpr_tag"><?php esc_html_e('Tags', 'language-school-child'); ?></span>
+		<span class="cmsmasters_theme_icon_lpr_duration"><?php esc_html_e('Tags', 'language-school-child'); ?></span>
 	</div>
 	<div class="cmsmasters_course_meta_info">
 <?php
