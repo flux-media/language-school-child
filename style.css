@@ -408,5 +408,11 @@ span.line-through {
 }
 
 .bottom_inner aside {
-	margin: 1em 2%;
+	margin: 0em 2%;
+}
+
+@media only screen and (max-width: 950px) {
+	.bottom_inner aside {
+		margin: 2em 2%;
+	}	
 }
