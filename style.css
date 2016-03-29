@@ -71,6 +71,7 @@ body {
 	margin-bottom: 1em;
 	color: #3d3d47;
 	font-weight: bold;
+	min-height: 40px;
 }
 
 /* For main page slider */
@@ -393,7 +394,7 @@ span.line-through {
 }
 
 .cmsmasters_learnpress_shortcode .lpr_course_post .lpr_course_title {
-	min-height: 54px;
+	min-height: 72px;
 }
 
 .display-mobile {
