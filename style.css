@@ -379,6 +379,10 @@ span.line-through {
 	text-decoration: line-through;
 }
 
+.float-right {
+	float: right;
+}
+
 .cmsmasters_learnpress_shortcode .lpr_course_post .cmsmasters_course_price.original_price {
 	background-color: white;
 	color: #3d3d47;

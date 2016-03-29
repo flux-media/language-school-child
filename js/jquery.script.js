@@ -52,11 +52,17 @@ jQuery(document).ready(function() {
 function doSticky() {
 	var $sidebar = jQuery('.cmsmasters_course_sidebar'),
 		$window = jQuery(window),
+		$content = jQuery('.cmsmasters_course_content'),
 		windowWidth = $window.width(),
 		scrollTop = $window.scrollTop(),
 		containerWidth = jQuery('.middle_inner').width(),
+		// http://stackoverflow.com/questions/12749844/finding-the-position-of-bottom-of-a-div-with-jquery
+		// contentBottom = $content.position().top + $content.outerHeight(true),
+		contentBottom = 170 + $content.outerHeight(true),
+		sidebarHeight = $sidebar.height(),
 		margin;
-	if (windowWidth > 950 && scrollTop > 200) {
+	console.log(scrollTop, contentBottom, sidebarHeight);
+	if (windowWidth > 950 && scrollTop > 200 && scrollTop < contentBottom - sidebarHeight) {
 		if (windowWidth < 1200) {
 			margin = 30;
 		} else if (windowWidth <= 1600) {
@@ -66,9 +72,15 @@ function doSticky() {
 		}
 		$sidebar.addClass('sticky');
 		$sidebar.css('right', ((windowWidth - containerWidth) / 2 + margin) + 'px');
+		$sidebar.css('top', '5%');
+	} else if (windowWidth > 950 && scrollTop >= contentBottom - sidebarHeight) {
+		$sidebar.removeClass('sticky');
+		$sidebar.css('right', 0);
+		$sidebar.css('top', contentBottom - sidebarHeight - 200 + 'px');
 	} else {
 		$sidebar.removeClass('sticky');
 		$sidebar.css('right', 'auto');
+		$sidebar.css('top', 'auto');
 	}
 }
 

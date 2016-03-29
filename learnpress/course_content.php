@@ -101,4 +101,20 @@
 			}
 		?>
 	</div>
+
+	<!-- Related courses -->
+	<div class="related-courses-wrapper">
+		<?php $category = wp_get_post_terms(get_the_ID(), 'course_category'); ?>
+		<?php echo do_shortcode('[cmsmasters_learnpress orderby="date" order="DESC" categories="' . $category[0]->slug . '" count="12" columns="4" classes="related-courses"]'); ?>
+	</div>
+	<style>
+		.related-courses-wrapper {
+			margin: 0 -20px;
+		}
+		.related-courses {
+			width: 100%;
+			float: left;
+			margin: 0;
+		}
+	</style>
 </article><!-- #post-## -->
