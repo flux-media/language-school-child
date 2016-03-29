@@ -128,10 +128,14 @@ function my_cmsmasters_learnpress($atts, $content = null) {
 		}
 		$out .= "<div class=\"lpr_course_subtitle\">" . nl2br(get_the_excerpt( $course_id )) . "</div>";
 		$out .= "</div>";
+
+		$saled_price = get_post_meta($course_id, '_lpr_course_duration', true);
 			
 		if ( !learn_press_is_free_course( $course_id ) ) {
 			$out .= "<div class=\"cmsmasters_course_price\">" . learn_press_get_currency_symbol() . number_format(floatval( get_post_meta( $course_id, '_lpr_course_price', true ) ) ) . "</div>";
-			$out .= "<div class=\"cmsmasters_course_price original_price\"><span class=\"line-through\">₩". number_format(get_post_meta( get_the_ID(), '_lpr_course_duration', true )) . "</span> →</div>";
+			if ($saled_price) {
+				$out .= "<div class=\"cmsmasters_course_price original_price\"><span class=\"line-through\">₩". number_format($saled_price) . "</span> →</div>";
+			}
 		} else {
 			$out .= "<div class=\"cmsmasters_course_free\">" . esc_html__('Free', 'language-school') . "</div>";
 		}

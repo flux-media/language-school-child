@@ -395,3 +395,18 @@ span.line-through {
 .cmsmasters_learnpress_shortcode .lpr_course_post .lpr_course_title {
 	min-height: 54px;
 }
+
+.display-mobile {
+	display: none;
+	visibility: none;
+}
+@media only screen and (max-width: 540px) {
+	.display-mobile {
+		display: block;
+		visibility: visible;
+	}
+}
+
+.bottom_inner aside {
+	margin: 1em 2%;
+}
