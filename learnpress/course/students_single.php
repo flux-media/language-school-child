@@ -19,7 +19,7 @@ learn_press_prevent_access_directly();
 			<?php if( $count = learn_press_count_students_enrolled() ):?>
 				<?php echo $count;?> / <?php echo learn_press_get_limit_student_enroll_course(); ?>
 			<?php else:?>
-			<?php esc_html_e('0', 'language-school-child');?>
+				<?php esc_html_e('0', 'language-school-child');?> / <?php echo learn_press_get_limit_student_enroll_course(); ?>
 			<?php endif;?>
 			<?php do_action( 'learn_press_end_course_students' );?>
 		</span>
