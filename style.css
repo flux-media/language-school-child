@@ -193,6 +193,15 @@ body {
     line-height: 1.25 !important;
 }
 
+@media only screen and (min-width: 951px) and (max-width: 1600px) {
+	.lpr_course_inner h6 a {
+		font-size: 19px !important;
+	}
+	.lpr_course_subtitle {
+		font-size: 11px !important;
+	}
+}
+
 .header_mid {
 	padding-top: 40px;
 }
