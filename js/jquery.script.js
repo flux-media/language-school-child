@@ -57,11 +57,9 @@ function doSticky() {
 		scrollTop = $window.scrollTop(),
 		containerWidth = jQuery('.middle_inner').width(),
 		// http://stackoverflow.com/questions/12749844/finding-the-position-of-bottom-of-a-div-with-jquery
-		// contentBottom = $content.position().top + $content.outerHeight(true),
 		contentBottom = 170 + $content.outerHeight(true),
 		sidebarHeight = $sidebar.height(),
 		margin;
-	console.log(scrollTop, contentBottom, sidebarHeight);
 	if (windowWidth > 950 && scrollTop > 200 && scrollTop < contentBottom - sidebarHeight) {
 		if (windowWidth < 1200) {
 			margin = 30;
