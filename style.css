@@ -194,7 +194,7 @@ body {
     line-height: 1.25 !important;
 }
 
-@media only screen and (min-width: 951px) and (max-width: 1600px) {
+@media only screen and (min-width: 951px) and (max-width: 1619px) {
 	.lpr_course_inner h6 a {
 		font-size: 19px !important;
 	}
@@ -425,4 +425,16 @@ span.line-through {
 	width: 100%;
 	float: left;
 	margin: 0;
+}
+
+@media only screen and (max-width: 540px) {
+	.cmsmasters_learnpress_shortcode .lpr_course_post {
+		padding: 0 0 40px !important;
+	}
+	.cmsmasters_learnpress_shortcode {
+		margin: 0 !important;
+	}
+	.related-courses-wrapper {
+		margin: 0;
+	}
 }
