@@ -24,13 +24,13 @@ if ( !defined( 'ABSPATH' ) ) {
 	
 	learn_press_get_template( 'course/tags_single.php' );
 
+	learn_press_get_template( 'course/course_duration_single.php' );
+
 	learn_press_get_template( 'course/classroom_single.php' );
 
 	learn_press_get_template( 'course/register_button_single.php');
 
 	learn_press_get_template( 'course/contact_button_single.php');
-	
-	// learn_press_get_template( 'course/enroll_button_single.php' );
 	
 	remove_action( 'learn_press_course_landing_content', 'learn_press_course_content', 60 );
 	remove_action( 'learn_press_course_landing_content', 'learn_press_course_curriculum', 70 );
