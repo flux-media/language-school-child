@@ -18,13 +18,13 @@ do_action( 'learn_press_before_course_price' );
 	</div>
 	<div class="cmsmasters_course_meta_info">
 		<span class="course-price">
-			<?php do_action( 'learn_press_begin_course_price' );?>
+			<?php do_action( 'learn_press_begin_course_price' ); ?>
 			<?php $saled_price = get_post_meta( get_the_ID(), '_lpr_course_duration', true ); ?>
 			<?php if ($saled_price): ?>
-			<span class="line-through float-right">₩ <?php echo number_format($saled_price); ?></span>
+			<span class="line-through float-right">₩ <span id="before-original-price"><?php echo number_format($saled_price); ?></span></span>
 			<br/> →
 			<?php endif; ?>
-			<?php echo learn_press_get_course_price( null, true );?>
+			₩ <span id="original-price"><?php echo number_format(get_post_meta( get_the_ID(), '_lpr_course_price', true)); ?></span>
 			<?php do_action( 'learn_press_end_course_price' );?>
 		</span>
 	</div>

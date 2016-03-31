@@ -33,6 +33,7 @@ if (is_singular() && get_option('thread_comments')) {
 
 wp_head();
 ?>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.1.js"></script>
 </head>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -44,6 +45,39 @@ wp_head();
   ga('send', 'pageview');
 </script>
 <body <?php body_class(); ?>>
+
+<div class="iamport-payment-box hidden" id="iamport-dialog">
+	<h5>수강료 결제</h5>
+	<p>아래 정보를 기입 후 결제진행해주세요.</p>
+	<p>
+		<label>결제수단</label>
+		<select name="pay_method">
+			<option value="card">신용카드</option>
+			<option value="vbank">가상계좌</option>
+			<option value="phone">휴대폰소액결제</option>
+		</select>
+	</p>
+	<p>
+		<label>결제자 Email</label>
+		<input type="email" name="buyer_email">
+	</p>
+	<p>
+		<label>결제자 성함</label>
+		<input type="text" name="buyer_name">
+	</p>
+	<p>
+		<label>결제자 전화번호</label>
+		<input type="tel" name="buyer_tel">
+	</p>									
+	<p class="button-holder" style="text-align:center">
+		<a href="#" class="iamport-payment-submit">결제하기</a>
+	</p>
+</div>
+
+<div class="iamport-result-box hidden" id="iamport-result-box" style="">
+	<h5 class="title">결제결과</h5>
+	<p class="content"></p>
+</div>
 	
 <!-- _________________________ Start Page _________________________ -->
 <div id="page" class="<?php language_school_get_page_classes($cmsmasters_option); ?>hfeed site">

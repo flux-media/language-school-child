@@ -14,13 +14,12 @@ if ( !defined( 'ABSPATH' ) ) {
 <?php do_action( 'learn_press_before_course_landing_content' ); ?>
 
 <?php 
-	learn_press_get_template( 'course/price_single.php' );
-	
 	learn_press_get_template( 'course/students_single.php' );
 	
 	add_action( 'learn_press_course_landing_content', 'learn_press_course_payment_form', 40 );
 	
-	learn_press_get_template( 'course/categories_single.php' );
+	// No need for category.
+	// learn_press_get_template( 'course/categories_single.php' );
 	
 	learn_press_get_template( 'course/tags_single.php' );
 
@@ -28,9 +27,15 @@ if ( !defined( 'ABSPATH' ) ) {
 
 	learn_press_get_template( 'course/classroom_single.php' );
 
-	learn_press_get_template( 'course/register_button_single.php');
+	learn_press_get_template( 'course/number_of_student_single.php' );
 
-	learn_press_get_template( 'course/contact_button_single.php');
+	learn_press_get_template( 'course/price_single.php' );
+
+	learn_press_get_template( 'course/register_via_import_single.php' );
+
+	learn_press_get_template( 'course/register_button_single.php' );
+
+	learn_press_get_template( 'course/contact_button_single.php' );
 	
 	remove_action( 'learn_press_course_landing_content', 'learn_press_course_content', 60 );
 	remove_action( 'learn_press_course_landing_content', 'learn_press_course_curriculum', 70 );
