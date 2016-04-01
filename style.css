@@ -243,6 +243,18 @@ body {
 	}
 }
 
+.cmsmasters_button.red {
+	background-color: #fe5969 !important;
+	color: white !important;
+	cursor: not-allowed;
+}
+
+.cmsmasters_button.red:hover {
+	background-color: white !important;
+	color: #fe5969 !important;
+	border-color: #fe5969 !important;
+}
+
 .take-course.cmsmasters_button {
 	background-color: #01a2a6 !important;
 	color: white !important;
@@ -429,7 +441,7 @@ span.line-through {
 .related-courses {
 	width: 100%;
 	float: left;
-	margin: 0;
+	margin: 0 !important;
 }
 
 @media only screen and (max-width: 540px) {
