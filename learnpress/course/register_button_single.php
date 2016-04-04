@@ -26,7 +26,7 @@ if (get_post_meta(get_the_ID(), '_lpr_course_condition', true) != 100) {
 ?>
 <div class="cmsmasters_course_meta_item text-align-center">
 	<a id="register-course" href="<?php echo esc_url(site_url($page_slug . '?title=' . urlencode(get_the_title()) . '&price=' . 
-		urlencode(get_post_meta(get_the_ID(), '_lpr_course_price', true)) . '&course_id=' . urlencode(get_the_ID()) )); ?>"
+		urlencode(get_post_meta(get_the_ID(), '_lpr_course_price', true)) . '&course_id=' . urlencode(get_the_ID()) . '&num_to_enroll=1' )); ?>"
 	class="btn take-course cmsmasters_button cmsmasters_but_bg_slide_top"><?php echo $button_text;?></a>
 </div>
 <?php } ?>

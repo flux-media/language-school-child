@@ -28,11 +28,12 @@ jQuery(document).ready(function() {
 			price = 0;
 		}
 		if (!title && !price && !courseId) {
-			jQuery('cmsmasters_pricing_table').remove();
+			jQuery('.cmsmasters_pricing_table').remove();
 		} else {
 			$pricing.html('<span class="cmsmasters_price">' + price + '</span><span class="cmsmasters_currency">원</span>');
 		}
 		jQuery('#avengerschool-course-title').val('강의명: ' + courseId + '. ' + title);
+		jQuery('#avengerschool-num-to-enroll').val(getURLParameter('num_to_enroll'));
 	}
 
 	/* Sticky */
@@ -42,11 +43,6 @@ jQuery(document).ready(function() {
 		jQuery(window).resize(doSticky);
 		jQuery(window).scroll(doSticky);
 	}
-
-	/* Form */
-	jQuery('.wpcf7').on('wpcf7:submit', function(event) {
-		// jQuery('#avengerschool-course-title').val('강의명: ' + courseId + '. ' + title);	
-	});
 
 	/* Number of students event listener */
 	var $numberOfStudents = jQuery('#number-of-students'),
@@ -87,7 +83,9 @@ jQuery(document).ready(function() {
 		$originalPrice.text(numberWithCommas(numberOfStudents * originalPrice));
 
 		// Update href to registration for the course.
-		$registerCourse.prop('href', replaceUrlParam(href, 'price', numberOfStudents * originalPrice));
+		var newHref = replaceUrlParam(href, 'price', numberOfStudents * originalPrice);
+		newHref = replaceUrlParam(newHref, 'num_to_enroll', numberOfStudents);
+		$registerCourse.prop('href', newHref);
 	});
 	$registerViaIamport.on('click', function(e) {
 		e.preventDefault();
