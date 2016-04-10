@@ -18,9 +18,6 @@ if ( !defined( 'ABSPATH' ) ) {
 	
 	add_action( 'learn_press_course_landing_content', 'learn_press_course_payment_form', 40 );
 	
-	// No need for category.
-	// learn_press_get_template( 'course/categories_single.php' );
-	
 	learn_press_get_template( 'course/tags_single.php' );
 
 	learn_press_get_template( 'course/course_duration_single.php' );

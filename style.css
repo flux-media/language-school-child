@@ -461,6 +461,10 @@ span.line-through {
 	visibility: none;
 }
 
+#learn_press_payment_form {
+	display: none;
+}
+
 /* TODO: Should I? */
 .iamport-payment-box {
 	width: 291px !important;

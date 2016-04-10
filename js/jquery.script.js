@@ -8,6 +8,8 @@
  * 
  */
 
+ // var domain = 'http://localhost:8888/';
+ var domain = 'http://avengerschool.com/';
 
 "use strict";
 
@@ -32,7 +34,7 @@ jQuery(document).ready(function() {
 		} else {
 			$pricing.html('<span class="cmsmasters_price">' + price + '</span><span class="cmsmasters_currency">원</span>');
 		}
-		jQuery('#avengerschool-course-title').val('강의명: ' + courseId + '. ' + title);
+		jQuery('#avengerschool-course-title').val(title);
 		jQuery('#avengerschool-num-to-enroll').val(getURLParameter('num_to_enroll'));
 	}
 
@@ -43,6 +45,25 @@ jQuery(document).ready(function() {
 		jQuery(window).resize(doSticky);
 		jQuery(window).scroll(doSticky);
 	}
+
+	/* Form */
+	jQuery('.wpcf7').on('wpcf7:submit', function(event) {
+		if (window.location.href.indexOf('register-for-courses') > -1) {
+			// Send 
+			jQuery.ajax({
+				method: 'POST',
+				url: domain + 'wp-admin/admin-ajax.php',
+				data: {
+					action: 'send_registration_feedback',
+					amount: jQuery('.cmsmasters_price').text(),
+					course_title: jQuery('#avengerschool-course-title').val(),
+					tel: jQuery('input[name=your-phone-number]').val(),
+					email: jQuery('input[name=your-email]').val(),
+					name: jQuery('input[name=your-name]').val()
+				}
+			});
+		}
+	});
 
 	/* Number of students event listener */
 	var $numberOfStudents = jQuery('#number-of-students'),
@@ -122,8 +143,8 @@ jQuery(document).ready(function() {
 		var order_amount = parseInt(numberOfStudents * originalPrice),
 			order_title = jQuery('h2.cmsmasters_course_title').text();
 		jQuery.ajax({
-			method: "POST",
-			url: "http://avengerschool.com/wp-admin/admin-ajax.php",
+			method: 'POST',
+			url: domain + 'wp-admin/admin-ajax.php',
 			data: {
 				action: 'get_order_uid',
 				order_title: order_title,
@@ -147,6 +168,18 @@ jQuery(document).ready(function() {
 				m_redirect_url: rsp.thankyou_url
 			}, function (callback) {
 				if (callback.success) {
+					// Send 
+					jQuery.ajax({
+						method: 'POST',
+						url: domain + 'wp-admin/admin-ajax.php',
+						data: {
+							action: 'send_registration_feedback',
+							status: 'success',
+							merchant_uid: rsp.order_uid,
+							thankyou_url: rsp.thankyou_url
+						}
+					});
+
 					//TODO : 다음버전에서 결제완료처리는 ajax로 하기
 					result_dialog.find('.title').text('결제완료 처리중');
 					result_dialog.find('.content').text('잠시만 기다려주세요. 결제완료 처리중입니다.');
@@ -155,6 +188,16 @@ jQuery(document).ready(function() {
 
 					location.href = rsp.thankyou_url;
 				} else {
+					jQuery.ajax({
+						method: 'POST',
+						url: domain + 'wp-admin/admin-ajax.php',
+						data: {
+							action: 'send_registration_feedback',
+							status: 'failure',
+							merchant_uid: rsp.order_uid
+						}
+					});
+
 					result_dialog.find('.title').text('결제실패');
 					result_dialog.find('.content').html('다음과 같은 사유로 결제에 실패하였습니다.<br>' + callback.error_msg);
 					result_dialog.dialog('open');

@@ -7,9 +7,7 @@
  *
  */
 learn_press_prevent_access_directly();
-if ( learn_press_is_enrolled_course() ) {
-    return;
-}
+
 do_action( 'learn_press_before_course_price' );
 ?>
 <div class="cmsmasters_course_meta_item">
@@ -18,13 +16,26 @@ do_action( 'learn_press_before_course_price' );
 	</div>
 	<div class="cmsmasters_course_meta_info">
 		<span class="course-price">
-			<?php do_action( 'learn_press_begin_course_price' ); ?>
-			<?php $saled_price = get_post_meta( get_the_ID(), '_lpr_course_duration', true ); ?>
-			<?php if ($saled_price): ?>
-			<span class="line-through float-right">₩ <span id="before-original-price"><?php echo number_format($saled_price); ?></span></span>
+			<?php
+			do_action( 'learn_press_begin_course_price' );
+
+			$regular_price = get_post_meta(get_the_ID(), '_lpr_course_price', true); 
+			$sale_price = '';
+
+			if ($regular_price == '') {
+				$regular_price = get_post_meta(get_the_ID(), '_price', true);
+				if (get_post_meta(get_the_ID(), '_sale_price', true)) {
+					$sale_price = get_post_meta(get_the_ID(), '_regular_price', true); 
+				}
+			} else {
+				$sale_price = get_post_meta(get_the_ID(), '_lpr_course_duration', true );
+			}
+			?>
+			<?php if ($sale_price): ?>
+			<span class="line-through float-right">₩ <span id="before-original-price"><?php echo number_format($sale_price); ?></span></span>
 			<br/> →
 			<?php endif; ?>
-			₩ <span id="original-price"><?php echo number_format(get_post_meta( get_the_ID(), '_lpr_course_price', true)); ?></span>
+			₩ <span id="original-price"><?php echo number_format($regular_price); ?></span>
 			<?php do_action( 'learn_press_end_course_price' );?>
 		</span>
 	</div>

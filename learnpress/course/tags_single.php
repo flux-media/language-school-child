@@ -10,7 +10,9 @@
 learn_press_prevent_access_directly();
 do_action( 'learn_press_before_course_tags' );
 $tags = get_the_term_list( get_the_ID(), 'course_tag', '', ', ', '' );
-if( $tags ) {
+if ($tags == '') {
+	$tags = get_post_meta(get_the_ID(), 'as_date', true);
+}
 ?>
 <div class="cmsmasters_course_meta_item">
 	<div class="cmsmasters_course_meta_title">
@@ -26,5 +28,4 @@ if( $tags ) {
 	</div>
 </div>
 <?php
-}	
 do_action( 'learn_press_after_course_tags' );

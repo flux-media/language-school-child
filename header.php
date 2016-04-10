@@ -9,10 +9,7 @@
  * 
  */
 
-
 $cmsmasters_option = language_school_get_global_options();
-
-
 ?><!DOCTYPE html>
 <!--[if IE 8]>
 <html class="ie ie8" <?php language_attributes(); ?>>
