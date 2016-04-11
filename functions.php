@@ -34,14 +34,15 @@ function my_child_shortcodes_setup() {
 	add_shortcode('woocommerce_learnpress', 'my_woocommerce_learnpress');
 }
 
-add_action( 'init', 'wpcodex_add_excerpt_support_for_pages' );
-function wpcodex_add_excerpt_support_for_pages() {
-	add_post_type_support( 'product', 'author' );
+add_action('init', 'wpcodex_add_author_support_to_product');
+function wpcodex_add_author_support_to_product() {
+	add_post_type_support('product', 'author');
 }
 
 add_action( 'add_meta_boxes', 'add_as_metaboxes' );
 // Add the custom meta boxes.
 function add_as_metaboxes() {
+	add_meta_box('as_location', 'Course Location', 'as_location', 'lpr_course', 'normal', 'high');
 	add_meta_box('as_duration', 'Course Duration', 'as_duration', 'product', 'normal', 'high');
 	add_meta_box('as_location', 'Course Location', 'as_location', 'product', 'normal', 'high');
 	add_meta_box('as_date', 'Course Date', 'as_date', 'product', 'normal', 'high');
