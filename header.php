@@ -50,8 +50,6 @@ wp_head();
 		<label>결제수단</label>
 		<select name="pay_method">
 			<option value="card">신용카드</option>
-			<option value="vbank">가상계좌</option>
-			<option value="phone">휴대폰소액결제</option>
 		</select>
 	</p>
 	<p>

@@ -287,7 +287,7 @@ function my_cmsmasters_learnpress($atts, $content = null) {
 
 		$out .= "<article class=\"lpr_course_post\">" . "\n" .
 			 "<a href=" . get_the_permalink( $course_id ) . ">" .
-			  "<img class=\"full-width heyho\" src=\"" . wp_get_attachment_image_url(get_post_thumbnail_id($course_id), 'medium') .
+			  "<img class=\"full-width\" src=\"" . wp_get_attachment_image_url(get_post_thumbnail_id($course_id), 'medium') .
 			  "\" title=\"" . $cmsmasters_title . "\" alt=\"" . $cmsmasters_title . "\" " . wp_get_attachment_image_srcset(get_post_thumbnail_id($course_id)) . "/>" . "\n" .
 			"<div class=\"lpr_course_inner\">" . "\n" . 
 			"<header class=\"entry-header lpr_course_header\">

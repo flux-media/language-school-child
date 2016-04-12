@@ -9,7 +9,7 @@
  */
 
  // var domain = 'http://localhost:8888/';
- var domain = 'http://avengerschool.com/';
+ var domain = 'https://avengerschool.com/';
 
 "use strict";
 
