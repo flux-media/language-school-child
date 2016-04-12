@@ -13,7 +13,7 @@ Domain Path: /framework/languages
 Tags: white, light, dark, one-column, two-columns, three-columns, four-columns, left-sidebar, right-sidebar, fixed-layout, responsive-layout, custom-background, custom-colors, custom-header, custom-menu, editor-style, featured-image-header, featured-images, flexible-header, full-width-template, microformats, post-formats, rtl-language-support, sticky-post, theme-options, threaded-comments, translation-ready
 */
 
-@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@import url(https://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
 body {
 	font-family: 'Nanum Gothic', sans-serif !important;
