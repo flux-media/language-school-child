@@ -119,8 +119,6 @@ function send_registration_feedback() {
 	$admin_email = get_option('admin_email');
 	$merchant_uid = $_POST['merchant_uid'];
 
-	echo $merchant_uid;
-
 	// Initialize SMS module.
 	include(dirname(__FILE__) . '/api.class.php');
 	$api = new gabiaSmsApi();
@@ -151,8 +149,6 @@ function send_registration_feedback() {
 			$name = get_post_meta($post_id, 'buyer_name', true);
 			$amount = get_post_meta($post_id, 'order_amount', true);
 			$course_title = get_the_title($post_id);
-
-			echo $course_title;
 		} else {
 			// TODO: Why no postious?
 			wp_mail($admin_email, '[어벤져스쿨] merchant_uid가 존재하지 않음.', '이유는 모름. 아임포트에게 연락해봐야 함. Merchant Uid: ' . $merchant_uid);
@@ -176,8 +172,8 @@ function send_registration_feedback() {
 			}
 			if ($result == gabiaSmsApi::$RESULT_OK) {
 			} else {
-				wp_mail($admin_email, '[어벤져스쿨] 문자 전송 실패.', 'Merchant Uid: ' . $merchant_uid . "\n" .
-					$api->getResultCode() . " : " . $api->getResultMessage());
+				wp_mail($admin_email, '[어벤져스쿨] 문자 전송 실패. (아임포트)', 'Merchant Uid: ' . $merchant_uid . "\n" .
+					$api->getResultCode() . " : " . $api->getResultMessage() . ', Payment ID: ' . $post_id );
 			}
 		} else if ($status == 'failure') {
 			wp_mail($email, '[어벤져스쿨] 결제에 실패했습니다.',
@@ -213,8 +209,8 @@ function send_registration_feedback() {
 			echo("이후 : " . $api->getAfter() . "<br>");
 		} else {
 			echo("error : " . $p . " - " . $api->getResultCode() . " - " . $api->getResultMessage() . "<br>");
-			wp_mail($admin_email, '[어벤져스쿨] 문자 전송 실패.', 'Merchant Uid: ' . $merchant_uid . "\n" .
-					$api->getResultCode() . " : " . $api->getResultMessage());
+			wp_mail($admin_email, '[어벤져스쿨] 문자 전송 실패. (무통장입금)',
+					$api->getResultCode() . " : " . $api->getResultMessage()  . ', Payment ID: ' . $post_id);
 		}
 	}
 }
