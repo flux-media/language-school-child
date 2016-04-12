@@ -372,6 +372,10 @@ html .cmsmasters_color_scheme_bottom a {
 	font-size: 16px;
 }
 
+html .cmsmasters_color_scheme_bottom a.yellow-id {
+	color: yellow !important;
+}
+
 html .bottom_bg {
 	padding: 2em;
 }
