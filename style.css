@@ -469,6 +469,14 @@ span.line-through {
 	display: none;
 }
 
+/* Woocommerce */
+div.quantity {
+	text-align: right;
+}
+div.quantity input {
+	width: 5.631em !important;
+}
+
 /* TODO: Should I? */
 .iamport-payment-box {
 	width: 291px !important;

@@ -29,7 +29,7 @@
 			}
 			
 			remove_action('learn_press_after_the_title', 'learn_press_print_rate');
-			do_action( 'learn_press_after_the_title' );	
+			do_action( 'learn_press_after_the_title' );
 			?>
 		</header>
 		<!-- .entry-header -->

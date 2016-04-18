@@ -12,7 +12,6 @@ learn_press_prevent_access_directly();
 
 global $course;
 do_action( 'learn_press_before_course_register_button' );
-// $button_text = apply_filters( 'learn_press_take_course_button_text', esc_html__( 'Take this course', 'language-school-child' ) );
 
 if (get_post_meta(get_the_ID(), '_lpr_course_final', true) == 'yes') {
 	$page_slug = 'stand-by';

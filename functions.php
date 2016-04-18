@@ -42,10 +42,11 @@ function wpcodex_add_author_support_to_product() {
 add_action( 'add_meta_boxes', 'add_as_metaboxes' );
 // Add the custom meta boxes.
 function add_as_metaboxes() {
-	add_meta_box('as_location', 'Course Location', 'as_location', 'lpr_course', 'normal', 'high');
-	add_meta_box('as_duration', 'Course Duration', 'as_duration', 'product', 'normal', 'high');
-	add_meta_box('as_location', 'Course Location', 'as_location', 'product', 'normal', 'high');
-	add_meta_box('as_date', 'Course Date', 'as_date', 'product', 'normal', 'high');
+	add_meta_box('as_location', '코스 장소', 'as_location', 'lpr_course', 'normal', 'high');
+	add_meta_box('as_duration', '코스 시간', 'as_duration', 'product', 'normal', 'high');
+	add_meta_box('as_location', '코스 장소', 'as_location', 'product', 'normal', 'high');
+	add_meta_box('as_date', '코스 날짜', 'as_date', 'product', 'normal', 'high');
+	add_meta_box('as_max_number_of_students', '최대 수강 인원', 'as_max_number_of_students', 'product', 'normal', 'high');
 }
 // The meta boxes
 function as_duration() {
@@ -72,6 +73,13 @@ function as_date() {
 	$date = get_post_meta($post->ID, 'as_date', true);
 	echo '<input type="text" name="as_date" value="' . htmlspecialchars($date)  . '" class="widefat" />';	
 }
+function as_max_number_of_students() {
+	global $post;
+	echo '<input type="hidden" name="eventmeta_noncename" id="eventmeta_noncename" value="' . 
+	wp_create_nonce( plugin_basename(__FILE__) ) . '" />';
+	$max_number = get_post_meta($post->ID, 'as_max_number_of_students', true);
+	echo '<input type="text" name="as_max_number_of_students" value="' . htmlspecialchars($max_number)  . '" class="widefat" />';	
+}
 // Save the Metabox Data
 function wpt_save_as_meta($post_id, $post) {
 	// verify this came from the our screen and with proper authorization,
@@ -87,6 +95,7 @@ function wpt_save_as_meta($post_id, $post) {
 	$events_meta['as_location'] = $_POST['as_location'];
 	$events_meta['as_duration'] = $_POST['as_duration'];
 	$events_meta['as_date'] = $_POST['as_date'];
+	$events_meta['as_max_number_of_students'] = $_POST['as_max_number_of_students'];
 	// Add values of $events_meta as custom fields
 	foreach ($events_meta as $key => $value) { // Cycle through the $events_meta array!
 		if( $post->post_type == 'revision' ) return; // Don't store custom data twice
@@ -303,12 +312,12 @@ function my_cmsmasters_learnpress($atts, $content = null) {
 		$out .= "<div class=\"lpr_course_subtitle\">" . nl2br(get_the_excerpt( $course_id )) . "</div>";
 		$out .= "</div>";
 
-		$saled_price = get_post_meta($course_id, '_lpr_course_duration', true);
+		$sale_price = get_post_meta($course_id, '_lpr_course_duration', true);
 			
 		if ( !learn_press_is_free_course( $course_id ) ) {
 			$out .= "<div class=\"cmsmasters_course_price\">" . learn_press_get_currency_symbol() . number_format(floatval( get_post_meta( $course_id, '_lpr_course_price', true ) ) ) . "</div>";
-			if ($saled_price) {
-				$out .= "<div class=\"cmsmasters_course_price original_price\"><span class=\"line-through\">₩". number_format($saled_price) . "</span> →</div>";
+			if ($sale_price) {
+				$out .= "<div class=\"cmsmasters_course_price original_price\"><span class=\"line-through\">₩". number_format($sale_price) . "</span> →</div>";
 			}
 		} else {
 			$out .= "<div class=\"cmsmasters_course_free\">" . esc_html__('Free', 'language-school') . "</div>";

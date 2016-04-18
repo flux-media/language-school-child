@@ -7,6 +7,18 @@
  *
  */
 learn_press_prevent_access_directly();
+
+global $product;
+$max_number = get_post_meta(get_the_ID(), 'as_max_number_of_students', true);
+if ($max_number) {
+	$count = $max_number - $product->stock;
+} else {
+	$max_number = learn_press_get_limit_student_enroll_course();
+	$count = learn_press_count_students_enrolled();
+	if (!$count) {
+		$count = 0;
+	}
+}
 ?>
 <?php do_action( 'learn_press_before_course_students' );?>
 <div class="cmsmasters_course_meta_item">
@@ -16,11 +28,7 @@ learn_press_prevent_access_directly();
 	<div class="cmsmasters_course_meta_info">
 		<span class="course-students">
 			<?php do_action( 'learn_press_begin_course_students' );?>
-			<?php if( $count = learn_press_count_students_enrolled() ):?>
-				<?php echo $count;?> / <?php echo learn_press_get_limit_student_enroll_course(); ?>
-			<?php else:?>
-				<?php esc_html_e('0', 'language-school-child');?> / <?php echo learn_press_get_limit_student_enroll_course(); ?>
-			<?php endif;?>
+			<?php echo $count . ' / ' . $max_number; ?>
 			<?php do_action( 'learn_press_end_course_students' );?>
 		</span>
 		<?php do_action( 'learn_press_after_course_students' );?>

@@ -103,10 +103,16 @@ jQuery(document).ready(function() {
 		}
 		$originalPrice.text(numberWithCommas(numberOfStudents * originalPrice));
 
+		// Woocommerce
+		jQuery('.add_to_cart_button').data('quantity', numberOfStudents);
+		jQuery('.wc_quick_buy_form').find('input[name=quantity]').val(numberOfStudents);
+
 		// Update href to registration for the course.
-		var newHref = replaceUrlParam(href, 'price', numberOfStudents * originalPrice);
-		newHref = replaceUrlParam(newHref, 'num_to_enroll', numberOfStudents);
-		$registerCourse.prop('href', newHref);
+		if ($registerCourse.length) {
+			var newHref = replaceUrlParam(href, 'price', numberOfStudents * originalPrice);
+			newHref = replaceUrlParam(newHref, 'num_to_enroll', numberOfStudents);
+			$registerCourse.prop('href', newHref);	
+		}
 	});
 	$registerViaIamport.on('click', function(e) {
 		e.preventDefault();

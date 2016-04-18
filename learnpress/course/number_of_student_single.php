@@ -9,11 +9,18 @@
  */
  
 learn_press_prevent_access_directly();
-
-global $course;
 do_action( 'learn_press_before_course_number_of_student' );
-// $button_text = apply_filters( 'learn_press_take_course_button_text', esc_html__( 'Take this course', 'language-school-child' ) );
-$button_text = '무통장입금';
+
+global $product;
+
+if ($product) {
+	$max_number = $product->stock;
+	if ($max_number > 10) {
+		$max_number = 10;
+	}	
+} else {
+	$max_number = 10;
+}
 ?>
 <div class="cmsmasters_course_meta_item">
 	<div class="cmsmasters_course_meta_title">
@@ -21,7 +28,7 @@ $button_text = '무통장입금';
 	</div>
 	<div class="cmsmasters_course_meta_info">
 		<select id="number-of-students">
-			<?php for ($i = 0; $i < 10; $i++) {
+			<?php for ($i = 0; $i < $max_number; $i++) {
 				echo '<option value="' . ($i + 1) . '">' . ($i + 1) . '명</option>';
 			} ?>
 		</select>
