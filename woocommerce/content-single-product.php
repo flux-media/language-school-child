@@ -42,7 +42,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @cmsmasters_version 	0.0.1
  *
  */
-	$cmsmasters_lpr_course_image = get_post_meta(get_the_ID(), 'as_image', true);
+	$cmsmasters_lpr_course_image = get_post_meta(get_the_ID(), 'as_display_thumbnail', true);
 	$user_url = get_the_author_meta('user_url');
 	$facebook = get_the_author_meta('facebook');
 	$twitter = get_the_author_meta('twitter');
@@ -126,11 +126,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div>
 			<div class="cmsmasters_course_sidebar">
 				<?php
-					if ( learn_press_is_enrolled_course() ) {
-						learn_press_get_template_part( 'course_content', 'learning_sidebar' );
-					} else {
-						learn_press_get_template_part( 'course_content', 'landing_sidebar' );
-					}
+					learn_press_get_template_part( 'course_content', 'landing_sidebar' );
 				?>
 			</div>
 

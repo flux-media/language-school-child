@@ -7,7 +7,7 @@
  *
  */
 learn_press_prevent_access_directly();
-
+global $product;
 do_action( 'learn_press_before_course_price' );
 ?>
 <div class="cmsmasters_course_meta_item">
@@ -32,10 +32,18 @@ do_action( 'learn_press_before_course_price' );
 			}
 			?>
 			<?php if ($sale_price): ?>
-			<span class="line-through float-right">₩ <span id="before-original-price"><?php echo number_format($sale_price); ?></span></span>
-			<br/> →
+				<?php if ($product): ?>
+					<span class="line-through float-right">₩ <span id="before-original-price"><?php echo number_format($product->get_price_including_tax(1, $sale_price)); ?></span></span>
+				<?php else: ?>
+					<span class="line-through float-right">₩ <span id="before-original-price"><?php echo number_format($sale_price); ?></span></span>
+				<?php endif; ?>
+				<br/> →
 			<?php endif; ?>
-			₩ <span id="original-price"><?php echo number_format($regular_price); ?></span>
+				<?php if ($product): ?>
+					₩ <span id="original-price"><?php echo number_format($product->get_price_including_tax(1, $regular_price)); ?></span>
+				<?php else: ?>
+					₩ <span id="original-price"><?php echo number_format($regular_price); ?></span>
+				<?php endif; ?>
 			<?php do_action( 'learn_press_end_course_price' );?>
 		</span>
 	</div>

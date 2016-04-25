@@ -275,7 +275,7 @@ body {
 .cmsmasters_course_sidebar {
 	font-size: 18px;
 }
-.cmsmasters_course_sidebar a {
+.cmsmasters_course_sidebar a, .cmsmasters_course_sidebar button {
 	font-size: 18px;
 }
 
@@ -475,6 +475,34 @@ div.quantity {
 }
 div.quantity input {
 	width: 5.631em !important;
+}
+a.add_to_cart_button {
+	-webkit-transition: all .3s ease-in-out !important;
+    -moz-transition: all .3s ease-in-out !important;
+    -ms-transition: all .3s ease-in-out !important;
+    -o-transition: all .3s ease-in-out !important;
+    transition: all .3s ease-in-out !important;
+    border-color: #01a2a6 !important;
+    background-color: #01a2a6 !important;
+    color: white !important;
+    border-width: 1px !important;
+    border-style: solid !important;
+    font-size: 18px !important;
+    font-family: 'Raleway', Arial, Helvetica, 'Nimbus Sans L', sans-serif !important;
+    line-height: 36px !important;
+    font-weight: bold !important;
+    font-style: normal !important;
+    text-transform: uppercase !important;
+    display: inline-block !important;
+    padding: 0 28px !important;
+    cursor: pointer !important;
+    position: relative !important;
+    border-radius: 20px !important;
+}
+a.add_to_cart_button:hover {
+    background-color: white !important;
+    color: #01a2a6 !important;
+    border-color: #01a2a6 !important;
 }
 
 /* TODO: Should I? */

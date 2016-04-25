@@ -12,7 +12,6 @@ learn_press_prevent_access_directly();
 do_action( 'learn_press_before_course_number_of_student' );
 
 global $product;
-
 if ($product) {
 	$max_number = $product->stock;
 	if ($max_number > 10) {
@@ -21,6 +20,8 @@ if ($product) {
 } else {
 	$max_number = 10;
 }
+
+if ($max_number > 0) {
 ?>
 <div class="cmsmasters_course_meta_item">
 	<div class="cmsmasters_course_meta_title">
@@ -34,4 +35,5 @@ if ($product) {
 		</select>
 	</div>
 </div>
+<?php } ?>
 <?php do_action( 'learn_press_after_course_number_of_student' );?>

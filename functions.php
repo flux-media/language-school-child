@@ -43,10 +43,11 @@ add_action( 'add_meta_boxes', 'add_as_metaboxes' );
 // Add the custom meta boxes.
 function add_as_metaboxes() {
 	add_meta_box('as_location', '코스 장소', 'as_location', 'lpr_course', 'normal', 'high');
-	add_meta_box('as_duration', '코스 시간', 'as_duration', 'product', 'normal', 'high');
+	add_meta_box('as_duration', '코스 시간(X시간)', 'as_duration', 'product', 'normal', 'high');
 	add_meta_box('as_location', '코스 장소', 'as_location', 'product', 'normal', 'high');
-	add_meta_box('as_date', '코스 날짜', 'as_date', 'product', 'normal', 'high');
+	add_meta_box('as_date', '코스 날짜(YYYY.MM.DD PM H:mm)', 'as_date', 'product', 'normal', 'high');
 	add_meta_box('as_max_number_of_students', '최대 수강 인원', 'as_max_number_of_students', 'product', 'normal', 'high');
+	add_meta_box('as_display_thumbnail', '특성 이미지 본문 표시 여부(true, false)', 'as_display_thumbnail', 'product', 'normal', 'high');
 }
 // The meta boxes
 function as_duration() {
@@ -80,6 +81,13 @@ function as_max_number_of_students() {
 	$max_number = get_post_meta($post->ID, 'as_max_number_of_students', true);
 	echo '<input type="text" name="as_max_number_of_students" value="' . htmlspecialchars($max_number)  . '" class="widefat" />';	
 }
+function as_display_thumbnail() {
+	global $post;
+	echo '<input type="hidden" name="eventmeta_noncename" id="eventmeta_noncename" value="' . 
+	wp_create_nonce( plugin_basename(__FILE__) ) . '" />';
+	$display_thumbnail = get_post_meta($post->ID, 'as_display_thumbnail', true);
+	echo '<input type="text" name="as_display_thumbnail" value="' . htmlspecialchars($display_thumbnail)  . '" class="widefat" />';	
+}
 // Save the Metabox Data
 function wpt_save_as_meta($post_id, $post) {
 	// verify this came from the our screen and with proper authorization,
@@ -96,6 +104,7 @@ function wpt_save_as_meta($post_id, $post) {
 	$events_meta['as_duration'] = $_POST['as_duration'];
 	$events_meta['as_date'] = $_POST['as_date'];
 	$events_meta['as_max_number_of_students'] = $_POST['as_max_number_of_students'];
+	$events_meta['as_display_thumbnail'] = $_POST['as_display_thumbnail'];
 	// Add values of $events_meta as custom fields
 	foreach ($events_meta as $key => $value) { // Cycle through the $events_meta array!
 		if( $post->post_type == 'revision' ) return; // Don't store custom data twice
@@ -120,9 +129,51 @@ function get_site_name($name) {
 	return '어벤져스쿨';
 }
 
-// Iamport success callback
+// Iamport success callback (old)
 add_action('wp_ajax_send_registration_feedback', 'send_registration_feedback');
 add_action('wp_ajax_nopriv_send_registration_feedback', 'send_registration_feedback');
+
+add_action('woocommerce_order_status_completed', 'on_order_complete');
+
+function on_order_complete( $order_id ) {
+	$admin_email = get_option('admin_email');
+
+	// Initialize SMS module.
+	include(dirname(__FILE__) . '/api.class.php');
+	$api = new gabiaSmsApi();
+	$admin_tel = $api->getAdminTel();
+
+	$merchant_uid = get_post_meta( $order_id, '_transaction_id', true);
+	$email = get_post_meta( $order_id, '_billing_email', true); 
+	$name = get_post_meta( $order_id, '_billing_last_name', true);
+	$tel = get_post_meta( $order_id, '_billing_phone', true); 
+	$amount = get_post_meta( $order_id, '_order_total', true);
+	// TODO: Get order items by order id, and combine their titles or so.
+	// $course_title = '';
+
+	wp_mail($email, '[어벤져스쿨] 성공적으로 강연 입금 및 등록이 완료되었습니다.',
+		'결제 번호: ' . $merchant_uid .  "\n" .
+		// '강의 제목: ' . $course_title . "\n" .
+		'수강자 이름: ' . $name .  "\n" .
+		'결제 금액: ' . $amount .  "\n" . 
+		'감사합니다.' . "\n" .
+		'- 어벤져스쿨.' . "\n");
+	// TODO: Include course titles if possible.
+	$message = '강연 입금( ' . $amount . '원) 및 등록이 완료되었습니다. 감사합니다. - 어벤져스쿨';
+	if (mb_strlen($message, 'UTF-8') > 45) {
+		$result = $api->lms_send($tel, $admin_tel, $message);
+	} else {
+		$result = $api->sms_send($tel, $admin_tel, $message);
+	}
+	if ($result == gabiaSmsApi::$RESULT_OK) {
+	} else {
+		wp_mail($admin_email, '[어벤져스쿨] 문자 전송 실패. (아임포트)',
+			'Merchant Uid: ' . $merchant_uid . "\n" .
+			$api->getResultCode() . " : " . $api->getResultMessage() . "\n" .
+			'Order ID: ' . $order_id );
+	}
+}
+
 function send_registration_feedback() {
 	// Get parameters.
 	$admin_email = get_option('admin_email');
@@ -224,7 +275,7 @@ function send_registration_feedback() {
 	}
 }
 
-
+// TODO: Get rid of it.
 function my_cmsmasters_learnpress($atts, $content = null) {
 	$new_atts = apply_filters('cmsmasters_learnpress_atts_filter', array( 
 		'orderby' => 		'', 
@@ -419,9 +470,10 @@ function my_woocommerce_learnpress($atts, $content = null) {
 		while ($query->have_posts()) : $query->the_post();
 	
 		$product_id = get_the_ID();
+		$product = new WC_Product( $product_id );
 		
 		$categories = get_the_term_list( $product_id, 'product_cat', '', ', ', '' );
-		$cmsmasters_title = cmsmasters_child_title($product_id, false);
+		$cmsmasters_title = cmsmasters_child_title( $product_id, false );
 
 		$out .= "<article class=\"lpr_course_post\">" . "\n" .
 			 "<a href=" . get_the_permalink( $product_id ) . ">" .
@@ -443,28 +495,68 @@ function my_woocommerce_learnpress($atts, $content = null) {
 		$out .= "<div class=\"lpr_course_subtitle\">" . nl2br(get_the_excerpt( $product_id )) . "</div>";
 		$out .= "</div>";
 
-		$regular_price = get_post_meta($product_id, '_regular_price', true);
-		$sale_price = get_post_meta($product_id, '_sale_price', true);
+		// 2016.04.30 PM 7:30 -> 2016.04.30 7:30 PM
+		$thedate = $date;
+		$thedate = preg_replace("/([0-9.]+) ([ap]m) ([0-9:]+)/i", "$1 $3 $2", $thedate);
+		$start_at = DateTime::createFromFormat('Y.m.d g:i A', $thedate);
+		$now = new DateTime('now');
+		$is_past = false;
+		if ($start_at === false) {
+			// Let $is_past be false.
+		} else {
+			$interval_in_sec = $start_at->getTimeStamp() - $now->getTimeStamp();
+		}
+		// TODO: 7200?
+		if ($interval_in_sec < 7200) {
+			$is_past = true;
+		}
+
+		$regular_price = get_post_meta( $product_id, '_regular_price', true );
+		$sale_price = get_post_meta( $product_id, '_sale_price', true );
 		$on_sale = $sale_price != '';
 
-		if ($regular_price != 0) {
-			$out .= "<div class=\"cmsmasters_course_price\">₩" . number_format(floatval( get_post_meta($product_id, '_price', true))) . "</div>";
-			if ($on_sale) {
-				$out .= "<div class=\"cmsmasters_course_price original_price\"><span class=\"line-through\">₩". number_format($regular_price) . "</span> →</div>";
+		// Product bundles don't have the exact datetime format.
+		if ($product->product_type == 'product_bundle') {
+			if ($product->stock_status == 'instock') {
+				if ($regular_price != 0) {
+					$out .= '<div class="cmsmasters_course_price">₩' . number_format($product->get_price_including_tax(1, get_post_meta($product_id, '_price', true))) . '</div>';
+					if ($on_sale) {
+						$out .= '<div class="cmsmasters_course_price original_price"><span class="line-through">₩'. number_format($product->get_price_including_tax(1, $regular_price)) . "</span> →</div>";
+					}
+				} else {
+					$out .= '<div class=\"cmsmasters_course_free\">무료</div>';
+				}
+			} else {
+				$out .= '<div class="cmsmasters_course_free">마감</div>';
 			}
 		} else {
-			$out .= "<div class=\"cmsmasters_course_free\">" . esc_html__('Free', 'language-school') . "</div>";
+			if ($is_past) {
+				$out .= '<div class="cmsmasters_course_free">완료</div>';
+			} else {
+				if ($product->stock > 0) {
+					if ($regular_price != 0) {
+						$out .= '<div class="cmsmasters_course_price">₩' . number_format($product->get_price_including_tax(1, get_post_meta($product_id, '_price', true))) . '</div>';
+						if ($on_sale) {
+							$out .= '<div class="cmsmasters_course_price original_price"><span class="line-through">₩'. number_format($product->get_price_including_tax(1, $regular_price)) . "</span> →</div>";
+						}
+					} else {
+						$out .= '<div class=\"cmsmasters_course_free\">무료</div>';
+					}
+				} else {
+					$out .= '<div class="cmsmasters_course_free">마감</div>';
+				}
+			}
 		}
 
 		if ($categories != '') {
-			$out .= "<div class=\"entry-meta cmsmasters_cource_cat\">" . $categories . "</div>";
+			$out .= '<div class="entry-meta cmsmasters_cource_cat">' . $categories . "</div>";
 		}
 		
 		// Removed rate.
-		$out .= "</div>" . "\n";
+		$out .= '</div>' . "\n";
 		
 		// Removed footer.	
-		$out .= "</article>" . "\n";
+		$out .= '</article>' . "\n";
 	
 		endwhile;
 	endif;
