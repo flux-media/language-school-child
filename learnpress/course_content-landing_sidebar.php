@@ -31,11 +31,11 @@ if ( !defined( 'ABSPATH' ) ) {
 	// TODO: Get rid of register_via_import_single, register_button_single
 	if (get_post_type(get_the_ID()) == 'product') {
 		learn_press_get_template( 'course/quick_buy_single.php' );
-		learn_press_get_template( 'course/add_to_cart_single.php' );
+		// learn_press_get_template( 'course/add_to_cart_single.php' );
 	} else {
 		learn_press_get_template( 'course/register_via_import_single.php' );
-		learn_press_get_template( 'course/register_button_single.php' );
 	}
+	learn_press_get_template( 'course/register_button_single.php' );
 
 	learn_press_get_template( 'course/contact_button_single.php' );
 	

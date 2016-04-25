@@ -30,7 +30,6 @@ if ($interval_in_sec < 7200) {
 }
 
 ?>
-
 <?php if ($product->product_type == 'product_bundle'): ?>
 <div class="cmsmasters_course_meta_item text-align-center">
 	<?php
