@@ -2649,7 +2649,7 @@ msgstr "이 상품은 보호돼있으며 구매할 수 없습니다."
 #: includes/wc-cart-functions.php:78
 msgid "%s has been added to your cart."
 msgid_plural "%s have been added to your cart."
-msgstr[0] ""
+msgstr[0] "%s 강연을 장바구니에 담았습니다."
 
 #: includes/wc-cart-functions.php:83
 msgid "Continue Shopping"

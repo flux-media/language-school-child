@@ -505,6 +505,10 @@ a.add_to_cart_button:hover {
     border-color: #01a2a6 !important;
 }
 
+label.label-agree {
+	display: inline !important;
+}
+
 /* TODO: Should I? */
 .iamport-payment-box {
 	width: 291px !important;

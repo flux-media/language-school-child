@@ -37,7 +37,7 @@ if ( ! wc_ship_to_billing_address_only() && get_option( 'woocommerce_calc_shippi
 $col = 1;
 ?>
 
-<h2><?php // echo $page_title; ?>내 결제 정보</h2>
+<h2><?php // echo $page_title; ?>내 결제 정보(어벤져스쿨 계정 정보와 다르게 설정할 수 있습니다.)</h2>
 
 <!-- <p class="myaccount_address">
 	<?php echo apply_filters( 'woocommerce_my_account_my_address_description', __( 'The following addresses will be used on the checkout page by default.', 'woocommerce' ) ); ?>

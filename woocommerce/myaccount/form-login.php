@@ -109,6 +109,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php do_action( 'register_form' ); ?>
 
 			<p class="form-row">
+				<input id="agree" type="checkbox">
+				<label class="label-agree" for="agree">
+					<a href="https://avengerschool.com/terms/" target="_blank">회원 약관</a>에 동의합니다.
+				</label>
+			</p>
+
+			<p class="form-row">
 				<?php wp_nonce_field( 'woocommerce-register' ); ?>
 				<input type="submit" class="button" name="register" value="<?php esc_attr_e( 'Register', 'woocommerce' ); ?>" />
 			</p>

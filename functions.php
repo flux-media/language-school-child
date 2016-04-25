@@ -138,6 +138,8 @@ add_action('woocommerce_order_status_completed', 'on_order_complete');
 function on_order_complete( $order_id ) {
 	$admin_email = get_option('admin_email');
 
+	$order = new WC_Order( $order_id );
+
 	// Initialize SMS module.
 	include(dirname(__FILE__) . '/api.class.php');
 	$api = new gabiaSmsApi();
@@ -149,17 +151,20 @@ function on_order_complete( $order_id ) {
 	$tel = get_post_meta( $order_id, '_billing_phone', true); 
 	$amount = get_post_meta( $order_id, '_order_total', true);
 	// TODO: Get order items by order id, and combine their titles or so.
-	// $course_title = '';
+	$course_titles = '';
+	foreach($order->get_items() as $item) {
+		$course_titles .= '<' . $item['name'] . '> ' ;
+	}
 
 	wp_mail($email, '[어벤져스쿨] 성공적으로 강연 입금 및 등록이 완료되었습니다.',
 		'결제 번호: ' . $merchant_uid .  "\n" .
-		// '강의 제목: ' . $course_title . "\n" .
+		'강의 제목: ' . $course_titles . "\n" .
 		'수강자 이름: ' . $name .  "\n" .
 		'결제 금액: ' . $amount .  "\n" . 
 		'감사합니다.' . "\n" .
 		'- 어벤져스쿨.' . "\n");
 	// TODO: Include course titles if possible.
-	$message = '강연 입금( ' . $amount . '원) 및 등록이 완료되었습니다. 감사합니다. - 어벤져스쿨';
+	$message = $course_titles . '강연 입금 및 등록이 완료되었습니다. 감사합니다. - 어벤져스쿨';
 	if (mb_strlen($message, 'UTF-8') > 45) {
 		$result = $api->lms_send($tel, $admin_tel, $message);
 	} else {
@@ -273,6 +278,15 @@ function send_registration_feedback() {
 					$api->getResultCode() . " : " . $api->getResultMessage()  . ', Payment ID: ' . $post_id);
 		}
 	}
+}
+
+// https://support.woothemes.com/hc/en-us/community/posts/201765553-Empty-Cart-before-adding-new-Item
+add_filter( 'woocommerce_add_cart_item_data', 'wdm_empty_cart', 10,  3);
+function wdm_empty_cart( $cart_item_data, $product_id, $variation_id ) {
+    global $woocommerce;
+    $woocommerce->cart->empty_cart();
+    // Do nothing with the data and return
+    return $cart_item_data;
 }
 
 // TODO: Get rid of it.

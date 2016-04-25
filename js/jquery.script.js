@@ -65,6 +65,16 @@ jQuery(document).ready(function() {
 		}
 	});
 
+	// Agree?
+	jQuery('form.register').on('submit', function(e) {
+		if (jQuery('#agree').is(':checked')) {
+			return true;
+		} else {
+			alert('약관에 동의하셔야 합니다.');
+			return false;
+		}
+	});
+
 	/* Number of students event listener */
 	var $numberOfStudents = jQuery('#number-of-students'),
 		$beforeOriginalPrice = jQuery('#before-original-price'),
