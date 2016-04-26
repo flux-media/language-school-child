@@ -14,6 +14,12 @@ function child_theme_setup() {
     load_child_theme_textdomain('language-school-child', get_stylesheet_directory().'/');
 }
 
+// https://docs.woothemes.com/document/third-party-custom-theme-compatibility/
+add_action( 'after_setup_theme', 'woocommerce_support' );
+function woocommerce_support() {
+    add_theme_support( 'woocommerce' );
+}
+
 add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
 function theme_enqueue_styles() {
     wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
