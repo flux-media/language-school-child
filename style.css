@@ -514,6 +514,10 @@ label.label-agree {
     line-height: 14px !important;
     width: 98% !important;
 }
+/* Cancel Language School style on Woocommerce style. */
+.woocommerce .order_details li:first-child {
+    padding: 10px 2em 0 0;
+}
 
 /* TODO: Should I? */
 .iamport-payment-box {
