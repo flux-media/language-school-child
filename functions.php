@@ -529,8 +529,8 @@ function my_woocommerce_learnpress($atts, $content = null) {
 		// 2016.04.30 PM 7:30 -> 2016.04.30 7:30 PM
 		$thedate = $date;
 		$thedate = preg_replace("/([0-9.]+) ([ap]m) ([0-9:]+)/i", "$1 $3 $2", $thedate);
-		$start_at = DateTime::createFromFormat('Y.m.d g:i A', $thedate);
-		$now = new DateTime('now');
+		$start_at = DateTime::createFromFormat('Y.m.d g:i A', $thedate, new DateTimeZone('Asia/Seoul'));
+		$now = new DateTime('now', new DateTimeZone('Asia/Seoul'));
 		$is_past = false;
 		if ($start_at === false) {
 			// Let $is_past be false.
