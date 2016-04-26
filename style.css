@@ -508,6 +508,12 @@ a.add_to_cart_button:hover {
 label.label-agree {
 	display: inline !important;
 }
+/* Misc. explanation for collection personal info on checkout page. */
+.woocommerce form h3.form-row {
+    font-size: 11px !important;
+    line-height: 14px !important;
+    width: 98% !important;
+}
 
 /* TODO: Should I? */
 .iamport-payment-box {
