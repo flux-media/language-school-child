@@ -289,6 +289,17 @@ function wdm_empty_cart( $cart_item_data, $product_id, $variation_id ) {
     return $cart_item_data;
 }
 
+// http://www.wpbeginner.com/wp-themes/how-to-show-different-menus-to-logged-in-users-in-wordpress/
+function my_wp_nav_menu_args( $args = '' ) {
+	if( is_user_logged_in() ) { 
+		$args['menu'] = 'logged-in';
+	} else { 
+		$args['menu'] = 'logged-out';
+	} 
+	return $args;
+}
+add_filter( 'wp_nav_menu_args', 'my_wp_nav_menu_args' );
+
 // TODO: Get rid of it.
 function my_cmsmasters_learnpress($atts, $content = null) {
 	$new_atts = apply_filters('cmsmasters_learnpress_atts_filter', array( 
