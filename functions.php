@@ -286,13 +286,59 @@ function send_registration_feedback() {
 	}
 }
 
-// https://support.woothemes.com/hc/en-us/community/posts/201765553-Empty-Cart-before-adding-new-Item
-add_filter( 'woocommerce_add_cart_item_data', 'wdm_empty_cart', 10,  3);
-function wdm_empty_cart( $cart_item_data, $product_id, $variation_id ) {
+/**
+ * Hook: Empty cart before adding a new product to cart WITHOUT throwing woocommerce_cart_is_empty
+ * https://wordpress.org/support/topic/how-to-empty-cart-before-adding-the-new-product-to-the-cart-in-woocommerce-1
+ */
+add_action ('woocommerce_add_to_cart', 'woocommerce_empty_cart_before_add', 0);
+function woocommerce_empty_cart_before_add() {
     global $woocommerce;
-    $woocommerce->cart->empty_cart();
-    // Do nothing with the data and return
-    return $cart_item_data;
+
+    // Get 'product_id' and 'quantity' for the current woocommerce_add_to_cart operation
+    if (isset($_GET["add-to-cart"])) {
+        $prodId = (int)$_GET["add-to-cart"];
+    } else if (isset($_POST["add-to-cart"])) {
+        $prodId = (int)$_POST["add-to-cart"];
+    } else {
+        $prodId = null;
+    }
+    if (isset($_GET["quantity"])) {
+        $prodQty = (int)$_GET["quantity"] ;
+    } else if (isset($_POST["quantity"])) {
+        $prodQty = (int)$_POST["quantity"];
+    } else {
+        $prodQty = 1;
+    }
+
+    // If cart is empty
+    if ($woocommerce->cart->get_cart_contents_count() == 0) {
+
+        // Simply add the product (nothing to do here)
+
+    // If cart is NOT empty
+    } else {
+
+        $cartQty = $woocommerce->cart->get_cart_item_quantities();
+        $cartItems = $woocommerce->cart->cart_contents;
+
+        // Check if desired product is in cart already
+        if (array_key_exists($prodId,$cartQty)) {
+
+            // Then first adjust its quantity
+            foreach ($cartItems as $k => $v) {
+                if ($cartItems[$k]['product_id'] == $prodId) {
+                    $woocommerce->cart->set_quantity($k,$prodQty);
+                }
+            }
+
+            // And only after that, set other products to zero quantity
+            foreach ($cartItems as $k => $v) {
+                if ($cartItems[$k]['product_id'] != $prodId) {
+                    $woocommerce->cart->set_quantity($k,'0');
+                }
+            }
+        }
+    }
 }
 
 // http://www.wpbeginner.com/wp-themes/how-to-show-different-menus-to-logged-in-users-in-wordpress/
