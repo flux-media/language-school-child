@@ -175,6 +175,10 @@ body {
 	width: 16.66%;
 }
 
+.main-woocommerce.cmsmasters_tabs.tabs_mode_tab .cmsmasters_tabs_list .cmsmasters_tabs_list_item {
+	width: 14.28%;
+}
+
 .cmsmasters_tabs .cmsmasters_tabs_list .cmsmasters_tabs_list_item > a {
 	font-size: 16px !important;
 }
