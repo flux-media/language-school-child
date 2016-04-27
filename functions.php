@@ -593,7 +593,7 @@ function my_woocommerce_learnpress($atts, $content = null) {
 		$on_sale = $sale_price != '';
 
 		// Product bundles don't have the exact datetime format.
-		if ($product->product_type == 'product_bundle') {
+		if ($product->product_type == 'bundle') {
 			if ($product->stock_status == 'instock') {
 				if ($regular_price != 0) {
 					$out .= '<div class="cmsmasters_course_price">₩' . number_format($product->get_price_including_tax(1, get_post_meta($product_id, '_price', true))) . '</div>';

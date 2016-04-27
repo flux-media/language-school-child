@@ -18,7 +18,7 @@ $button_text = '무통장입금';
 $visible = true;
 if (get_post_type(get_the_ID()) == 'product') {
 	$price = $product->get_price_including_tax(1, get_post_meta(get_the_ID(), '_price', true));
-	if ($product->product_type == 'product_bundle') {
+	if ($product->product_type == 'bundle') {
 		if ($product->stock_status == 'instock') {
 
 		} else {
@@ -48,7 +48,7 @@ if (get_post_type(get_the_ID()) == 'product') {
 
 			} else {
 				$page_slug = 'stand-by';
-				$button_text = '대기자 등록';		
+				$button_text = '대기자 등록';
 			}
 		}
 	}

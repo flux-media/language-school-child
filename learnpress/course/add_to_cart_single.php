@@ -30,7 +30,7 @@ if ($start_at === false) {
 }
 
 ?>
-<?php if ($product->product_type == 'product_bundle'): ?>
+<?php if ($product->product_type == 'bundle'): ?>
 <div class="cmsmasters_course_meta_item text-align-center">
 	<?php
 		if ($product->stock_status == 'instock') {

@@ -32,7 +32,7 @@ if ($start_at === false) {
 ?>
 <div class="cmsmasters_course_meta_item text-align-center">
 <?php
-	if ($product->product_type == 'product_bundle') {
+	if ($product->product_type == 'bundle') {
 		if ($product->stock_status == 'instock') {
 			echo do_shortcode('[wc_quick_buy]');
 		} else {
