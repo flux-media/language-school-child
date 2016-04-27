@@ -186,7 +186,10 @@ body {
 @media only screen and (max-width: 768px) {
 	.cmsmasters_tabs.tabs_mode_tab .cmsmasters_tabs_list .cmsmasters_tabs_list_item {
 		width: 100%;
-	}	
+	}
+	.main-woocommerce.cmsmasters_tabs.tabs_mode_tab .cmsmasters_tabs_list .cmsmasters_tabs_list_item {
+		width: 100%;
+	}
 }
 
 .cmsmasters_learnpress_shortcode .lpr_course_post .lpr_course_inner {

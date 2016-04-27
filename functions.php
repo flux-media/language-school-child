@@ -478,7 +478,7 @@ function my_woocommerce_learnpress($atts, $content = null) {
 	
 	$args = array( 
 		'post_type' => 				'product', 
-		'orderby' => 				$orderby, 
+		'orderby' => 				'date', 
 		'order' => 					$order, 
 		'posts_per_page' => 		$count 
 	);
