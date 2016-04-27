@@ -536,10 +536,10 @@ function my_woocommerce_learnpress($atts, $content = null) {
 			// Let $is_past be false.
 		} else {
 			$interval_in_sec = $start_at->getTimeStamp() - $now->getTimeStamp();
-		}
-		// TODO: 7200?
-		if ($interval_in_sec < 7200) {
-			$is_past = true;
+			// TODO: 7200?
+			if ($interval_in_sec < 7200) {
+				$is_past = true;
+			}
 		}
 
 		$regular_price = get_post_meta( $product_id, '_regular_price', true );

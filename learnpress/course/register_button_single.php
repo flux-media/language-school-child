@@ -35,10 +35,10 @@ if (get_post_type(get_the_ID()) == 'product') {
 			// Let $is_past be false.
 		} else {
 			$interval_in_sec = $start_at->getTimeStamp() - $now->getTimeStamp();
-		}
-		// TODO: 7200?
-		if ($interval_in_sec < 7200) {
-			$is_past = true;
+			// TODO: 7200?
+			if ($interval_in_sec < 7200) {
+				$is_past = true;
+			}
 		}
 
 		if ($is_past) {

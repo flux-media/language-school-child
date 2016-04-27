@@ -23,10 +23,10 @@ if ($start_at === false) {
 	// Let $is_past be false.
 } else {
 	$interval_in_sec = $start_at->getTimeStamp() - $now->getTimeStamp();
-}
-// TODO: 7200?
-if ($interval_in_sec < 7200) {
-	$is_past = true;
+	// TODO: 7200?
+	if ($interval_in_sec < 7200) {
+		$is_past = true;
+	}
 }
 
 ?>
