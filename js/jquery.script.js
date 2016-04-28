@@ -8,8 +8,7 @@
  * 
  */
 
- // var domain = 'http://localhost:8888/';
- var domain = 'https://avengerschool.com/';
+var domain = 'https://avengerschool.com/';
 
 "use strict";
 
@@ -80,23 +79,8 @@ jQuery(document).ready(function() {
 		$beforeOriginalPrice = jQuery('#before-original-price'),
 		$originalPrice = jQuery('#original-price'),
 		$registerCourse = jQuery('#register-course'),
-		$registerViaIamport = jQuery('#register-via-iamport'),
-		$iamportPaymentBox = jQuery('#iamport-dialog'),
-		$iamportResultBox = jQuery('#iamport-result-box'),
-		numberOfStudents, beforeOriginalPrice, originalPrice, href,
-		iamport_dialog = $iamportPaymentBox.dialog({
-			autoOpen: false, modal: true, draggable: false, close: function () {
-				jQuery(this).find('.iamport-payment-submit').attr('data-progress', null).text('결제하기');
-			}
-		}),
-		result_dialog = $iamportResultBox.dialog({
-			autoOpen: false, modal: true, draggable: false
-		});
-	$iamportPaymentBox.removeClass('hidden');
-	$iamportResultBox.removeClass('hidden');
+		numberOfStudents, beforeOriginalPrice, originalPrice, href;
 
-	$iamportPaymentBox.prop('id', 'fake-id');
-	jQuery('.take-course.fake-button').hide();
 	if ($beforeOriginalPrice.length > 0) {
 		beforeOriginalPrice = parseInt($beforeOriginalPrice.text().replace(',', ''), 10);
 	}
@@ -123,106 +107,6 @@ jQuery(document).ready(function() {
 			newHref = replaceUrlParam(newHref, 'num_to_enroll', numberOfStudents);
 			$registerCourse.prop('href', newHref);	
 		}
-	});
-	$registerViaIamport.on('click', function(e) {
-		e.preventDefault();
-		iamport_dialog.dialog('open');
-		IMP.init('imp37043335');
-		return false;
-	});
-	$iamportPaymentBox.on('click', 'a.iamport-payment-submit', function() {
-		var $this = jQuery(this);
-		if ($this.attr('data-progress') == 'true') {
-			return false;
-		}
-
-		$this.attr('data-progress', 'true').text('결제 중입니다...');
-		var box = $this.closest('.iamport-payment-box'),
-			pay_method = box.find('select[name="pay_method"]').val(),
-			buyer_name = box.find('input[name="buyer_name"]').val() || '',
-			buyer_email = box.find('input[name="buyer_email"]').val() || '',
-			buyer_tel = box.find('input[name="buyer_tel"]').val() || '';
-
-		if (!buyer_email) {
-			alert('결제자 Email을 입력해주세요.');
-			return false;
-		}
-		if (!buyer_name) {
-			alert('결제자 성함을 입력해주세요.');
-			return false;
-		}
-		if (!buyer_tel) {
-			alert('결제자 전화번호를 입력해주세요.');
-			return false;
-		}
-
-		var order_amount = parseInt(numberOfStudents * originalPrice),
-			order_title = jQuery('h2.cmsmasters_course_title').text();
-		jQuery.ajax({
-			method: 'POST',
-			url: domain + 'wp-admin/admin-ajax.php',
-			data: {
-				action: 'get_order_uid',
-				order_title: order_title,
-				pay_method: pay_method,
-				buyer_name: buyer_name,
-				buyer_email: buyer_email,
-				buyer_tel: buyer_tel,
-				order_amount: order_amount
-			}
-		}).done(function (rsp) {
-			iamport_dialog.dialog('close');
-
-			IMP.request_pay({
-				pay_method: pay_method,
-				merchant_uid: rsp.order_uid,
-				name: order_title,
-				amount: order_amount,
-				buyer_name: buyer_name,
-				buyer_email: buyer_email,
-				buyer_tel: buyer_tel,
-				m_redirect_url: rsp.thankyou_url
-			}, function (callback) {
-				if (callback.success) {
-					// Send 
-					jQuery.ajax({
-						method: 'POST',
-						url: domain + 'wp-admin/admin-ajax.php',
-						data: {
-							action: 'send_registration_feedback',
-							status: 'success',
-							merchant_uid: rsp.order_uid,
-							thankyou_url: rsp.thankyou_url
-						}
-					});
-
-					//TODO : 다음버전에서 결제완료처리는 ajax로 하기
-					result_dialog.find('.title').text('결제완료 처리중');
-					result_dialog.find('.content').text('잠시만 기다려주세요. 결제완료 처리중입니다.');
-					result_dialog.find('.iamport-payment-link').attr('href', rsp.thankyou_url);
-					result_dialog.dialog('open');
-
-					location.href = rsp.thankyou_url;
-				} else {
-					jQuery.ajax({
-						method: 'POST',
-						url: domain + 'wp-admin/admin-ajax.php',
-						data: {
-							action: 'send_registration_feedback',
-							status: 'failure',
-							merchant_uid: rsp.order_uid
-						}
-					});
-
-					result_dialog.find('.title').text('결제실패');
-					result_dialog.find('.content').html('다음과 같은 사유로 결제에 실패하였습니다.<br>' + callback.error_msg);
-					result_dialog.dialog('open');
-					//location.href = rsp.thankyou_url;
-				}
-			});
-		});
-
-		return false;
 	});
 });
 
