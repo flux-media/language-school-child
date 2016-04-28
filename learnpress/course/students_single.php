@@ -10,15 +10,7 @@ learn_press_prevent_access_directly();
 
 global $product;
 $max_number = get_post_meta(get_the_ID(), 'as_max_number_of_students', true);
-if ($max_number) {
-	$count = $max_number - $product->stock;
-} else {
-	$max_number = learn_press_get_limit_student_enroll_course();
-	$count = learn_press_count_students_enrolled();
-	if (!$count) {
-		$count = 0;
-	}
-}
+$count = $max_number - $product->stock;
 ?>
 <?php do_action( 'learn_press_before_course_students' );?>
 <div class="cmsmasters_course_meta_item">
