@@ -138,7 +138,7 @@ function get_site_name($name) {
 // Iamport success callback (old)
 add_action('wp_ajax_send_registration_feedback', 'send_registration_feedback');
 add_action('wp_ajax_nopriv_send_registration_feedback', 'send_registration_feedback');
-
+// Iamport success callback (new)
 add_action('woocommerce_order_status_completed', 'on_order_complete');
 
 function on_order_complete( $order_id ) {
@@ -156,20 +156,10 @@ function on_order_complete( $order_id ) {
 	$name = get_post_meta( $order_id, '_billing_last_name', true);
 	$tel = get_post_meta( $order_id, '_billing_phone', true); 
 	$amount = get_post_meta( $order_id, '_order_total', true);
-	// TODO: Get order items by order id, and combine their titles or so.
 	$course_titles = '';
 	foreach($order->get_items() as $item) {
 		$course_titles .= '<' . $item['name'] . '> ' ;
 	}
-
-	wp_mail($email, '[어벤져스쿨] 성공적으로 강연 입금 및 등록이 완료되었습니다.',
-		'결제 번호: ' . $merchant_uid .  "\n" .
-		'강의 제목: ' . $course_titles . "\n" .
-		'수강자 이름: ' . $name .  "\n" .
-		'결제 금액: ' . $amount .  "\n" . 
-		'감사합니다.' . "\n" .
-		'- 어벤져스쿨.' . "\n");
-	// TODO: Include course titles if possible.
 	$message = $course_titles . '강연 입금 및 등록이 완료되었습니다. 감사합니다. - 어벤져스쿨';
 	if (mb_strlen($message, 'UTF-8') > 45) {
 		$result = $api->lms_send($tel, $admin_tel, $message);
