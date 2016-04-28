@@ -9,7 +9,7 @@
  * 
  */
 
-add_action('after_setup_theme', 'child_theme_setup');
+add_action( 'after_setup_theme', 'child_theme_setup' );
 function child_theme_setup() {
     load_child_theme_textdomain('language-school-child', get_stylesheet_directory().'/');
 }
@@ -27,16 +27,14 @@ function theme_enqueue_styles() {
 
 add_action( 'wp_enqueue_scripts', 'theme_enqueue_scripts');
 function theme_enqueue_scripts() {
-	wp_enqueue_script('masonry');
-	wp_enqueue_script('imagesLoaded', get_stylesheet_directory_uri(). '/js/imagesloaded.pkgd.min.js', array('masonry'), false, true);
-	wp_enqueue_script('jquery-ui', get_stylesheet_directory_uri() . '/js/jquery-ui.min.js', array('jquery'), false, true);
-	wp_enqueue_script('child_script', get_stylesheet_directory_uri() . '/js/jquery.script.js', array('jquery'), false, true);
+	wp_enqueue_script( 'masonry' );
+	wp_enqueue_script( 'imagesLoaded', get_stylesheet_directory_uri(). '/js/imagesloaded.pkgd.min.js', array('masonry'), false, true );
+	wp_enqueue_script( 'jquery-ui', get_stylesheet_directory_uri() . '/js/jquery-ui.min.js', array('jquery'), false, true );
+	wp_enqueue_script( 'child_script', get_stylesheet_directory_uri() . '/js/jquery.script.js', array('jquery'), false, true );
 }
 
 add_action('after_setup_theme', 'my_child_shortcodes_setup');
 function my_child_shortcodes_setup() {
-	remove_shortcode('cmsmasters_learnpress');
-	add_shortcode('cmsmasters_learnpress', 'my_cmsmasters_learnpress');
 	add_shortcode('woocommerce_learnpress', 'my_woocommerce_learnpress');
 }
 
@@ -48,7 +46,6 @@ function wpcodex_add_author_support_to_product() {
 add_action( 'add_meta_boxes', 'add_as_metaboxes' );
 // Add the custom meta boxes.
 function add_as_metaboxes() {
-	add_meta_box('as_location', '코스 장소', 'as_location', 'lpr_course', 'normal', 'high');
 	add_meta_box('as_duration', '코스 시간(X시간)', 'as_duration', 'product', 'normal', 'high');
 	add_meta_box('as_location', '코스 장소', 'as_location', 'product', 'normal', 'high');
 	add_meta_box('as_date', '코스 날짜(YYYY.MM.DD PM H:mm)', 'as_date', 'product', 'normal', 'high');
@@ -342,130 +339,6 @@ function my_wp_nav_menu_args( $args = '' ) {
 }
 add_filter( 'wp_nav_menu_args', 'my_wp_nav_menu_args' );
 
-// TODO: Get rid of it.
-function my_cmsmasters_learnpress($atts, $content = null) {
-	$new_atts = apply_filters('cmsmasters_learnpress_atts_filter', array( 
-		'orderby' => 		'', 
-		'order' => 			'', 
-		'categories' => 	'', 
-		'count' => 			'', 
-		'columns' => 		'', 
-		'classes' => 		'' 
-	));
-	
-	$shortcode_name = 'learnpress';
-	$shortcode_path = CMSMASTERS_CONTENT_COMPOSER_TEMPLATE_DIR . '/cmsmasters-' . $shortcode_name . '.php';
-	
-	if (locate_template($shortcode_path)) {
-		$template_out = cmsmasters_composer_load_template($shortcode_path, array( 
-			'atts' => 		$atts, 
-			'new_atts' => 	$new_atts, 
-			'content' => 	$content 
-		) );	
-		return $template_out;
-	}
-	
-	extract(shortcode_atts($new_atts, $atts));
-
-	$unique_id = uniqid();
-	
-	if ($columns == '4' || $columns == '5') {
-		$course_thumb = 'cmsmasters-square-thumb';
-	} else {
-		$course_thumb = 'cmsmasters-project-thumb';
-	}
-		
-	$out = '<div id="cmsmasters_learnpress_shortcode_' . $unique_id . '" class="cmsmasters_learnpress_shortcode' . 
-	(($columns != '') ? ' cmsmasters_' . $columns : '') . 
-	(($classes != '') ? ' ' . $classes : '') . 
-	'">';
-	
-	$args = array( 
-		'post_type' => 				'lpr_course', 
-		'orderby' => 				$orderby, 
-		'order' => 					$order, 
-		'posts_per_page' => 		$count 
-	);
-	
-	if ($categories != '') {
-		$cat_array = explode(",", $categories);
-		
-		$args['tax_query'] = array( 
-			array( 
-				'taxonomy' => 'course_category', 
-				'field' => 'slug', 
-				'terms' => $cat_array 
-			)
-		);
-	}
-	
-	$query = new WP_Query($args);
-	
-	
-	if ($query->have_posts()) : 
-		while ($query->have_posts()) : $query->the_post();
-	
-		$course_id = get_the_ID();
-		
-		$course_duration = get_post_meta( $course_id, '_lpr_course_duration', true );
-		$term_list = get_the_term_list( $course_id, 'course_category', '', ', ', '' );
-		$cmsmasters_title = cmsmasters_child_title($course_id, false);
-		$posttags = get_the_term_list( $course_id, 'course_tag', '', ', ', '' );
-
-		$out .= "<article class=\"lpr_course_post\">" . "\n" .
-			 "<a href=" . get_the_permalink( $course_id ) . ">" .
-			  "<img class=\"full-width\" src=\"" . wp_get_attachment_image_url(get_post_thumbnail_id($course_id), 'medium') .
-			  "\" title=\"" . $cmsmasters_title . "\" alt=\"" . $cmsmasters_title . "\" " . wp_get_attachment_image_srcset(get_post_thumbnail_id($course_id)) . "/>" . "\n" .
-			"<div class=\"lpr_course_inner\">" . "\n" . 
-			"<header class=\"entry-header lpr_course_header\">
-			<h6 class=\"entry-title lpr_course_title\"><a href=" . get_the_permalink( $course_id ) . ">" . get_the_title( $course_id ) . "</a></h6>
-			</header>" . "\n";
-
-		$out .= "<div><div class=\"lpr_course_author\">" . get_the_author_meta('nickname') . "</div>";
-		if ($posttags != '') {
-			$out .= "<div class=\"lpr_course_date\">" . $posttags . "</div>";
-		} else {
-			$out .= "<div class=\"lpr_course_date\">날짜 미정</div>";
-		}
-		$out .= "<div class=\"lpr_course_subtitle\">" . nl2br(get_the_excerpt( $course_id )) . "</div>";
-		$out .= "</div>";
-
-		$sale_price = get_post_meta($course_id, '_lpr_course_duration', true);
-			
-		if ( !learn_press_is_free_course( $course_id ) ) {
-			$out .= "<div class=\"cmsmasters_course_price\">" . learn_press_get_currency_symbol() . number_format(floatval( get_post_meta( $course_id, '_lpr_course_price', true ) ) ) . "</div>";
-			if ($sale_price) {
-				$out .= "<div class=\"cmsmasters_course_price original_price\"><span class=\"line-through\">₩". number_format($sale_price) . "</span> →</div>";
-			}
-		} else {
-			$out .= "<div class=\"cmsmasters_course_free\">" . esc_html__('Free', 'language-school') . "</div>";
-		}
-
-		if ($term_list != '') {
-			$out .= "<div class=\"entry-meta cmsmasters_cource_cat\">" . $term_list . "</div>";
-		}
-		
-		// Removed rate.
-		$out .= "</div>" . "\n";
-		
-		// Removed footer.	
-		$out .= "</article>" . "\n";
-	
-		endwhile;
-	endif;
-	
-	
-	wp_reset_postdata();
-	
-	wp_reset_query();
-	
-	
-	$out .= '</div>';
-	
-	
-	return $out;
-}
-
 function my_woocommerce_learnpress($atts, $content = null) {
 	$new_atts = apply_filters('cmsmasters_learnpress_atts_filter', array( 
 		'orderby' => 		'', 
@@ -476,11 +349,8 @@ function my_woocommerce_learnpress($atts, $content = null) {
 		'classes' => 		'' 
 	) );
 	
-	
 	$shortcode_name = 'learnpress';
-	
 	$shortcode_path = CMSMASTERS_CONTENT_COMPOSER_TEMPLATE_DIR . '/cmsmasters-' . $shortcode_name . '.php';
-	
 	
 	if (locate_template($shortcode_path)) {
 		$template_out = cmsmasters_composer_load_template($shortcode_path, array( 
@@ -488,14 +358,10 @@ function my_woocommerce_learnpress($atts, $content = null) {
 			'new_atts' => 	$new_atts, 
 			'content' => 	$content 
 		) );
-		
-		
 		return $template_out;
 	}
 	
-	
 	extract(shortcode_atts($new_atts, $atts));
-	
 	
 	$unique_id = uniqid();
 	
@@ -505,12 +371,10 @@ function my_woocommerce_learnpress($atts, $content = null) {
 		$course_thumb = 'cmsmasters-project-thumb';
 	}
 	
-	
 	$out = '<div id="cmsmasters_learnpress_shortcode_' . $unique_id . '" class="cmsmasters_learnpress_shortcode' . 
 	(($columns != '') ? ' cmsmasters_' . $columns : '') . 
 	(($classes != '') ? ' ' . $classes : '') . 
 	'">';
-	
 	
 	$args = array( 
 		'post_type' => 				'product', 
