@@ -64,7 +64,7 @@ jQuery(document).ready(function() {
 		}
 	});
 
-	// Agree?
+	/* Agree? */
 	jQuery('form.register').on('submit', function(e) {
 		if (jQuery('#agree').is(':checked')) {
 			return true;
@@ -108,6 +108,88 @@ jQuery(document).ready(function() {
 			$registerCourse.prop('href', newHref);	
 		}
 	});
+
+	/* Assigning hashtags to main tabs */
+	var $mainTabContainer = jQuery('.cmsmasters_tabs.main-woocommerce'),
+		hashValue = window.location.hash.substr(1),
+		slugInKorean = '';
+	if ($mainTabContainer.length > 0) {
+		// Update hash.
+		$mainTabContainer.find('li>a').on('click', function(e) {
+			var $this = jQuery(this), innerText = jQuery.trim($this.text()), slug = '';
+			switch (innerText) {
+				case '전체':
+					slug = '';
+					break;
+				case '패키지':
+					slug = 'package';
+					break;
+				case '글쓰기':
+					slug = 'writing';
+					break;
+				case '비즈니스':
+					slug = 'business';
+					break;
+				case '경제':
+					slug = 'economy';
+					break;
+				case '마케팅':
+					slug = 'marketing';
+					break;
+				case '헬조선':
+					slug = 'hell-chosun';
+					break;
+			}
+			if (slug) {
+				parent.location.hash = '#' + slug;	
+			} else {
+				return true;
+			}
+		});
+
+		// Set a tab according to hash.
+		if (hashValue != '') {
+			switch (hashValue) {
+				case 'package':
+					slugInKorean = '패키지';
+					break;
+				case 'writing':
+					slugInKorean = '글쓰기';
+					break;
+				case 'business':
+					slugInKorean = '비즈니스';
+					break;
+				case 'economy':
+					slugInKorean = '경제';
+					break;
+				case 'marketing':
+					slugInKorean = '마케팅';
+					break;
+				case 'hell-chosun':
+					slugInKorean = '헬조선';
+					break;
+			}
+			$mainTabContainer.find('li>a').each(function() {
+				var $this = jQuery(this), innerText = jQuery.trim($this.text());
+				if (innerText == slugInKorean) {
+					// From language-school's jquery.script.js onClick
+					var tabs_parent = $this.parents('.cmsmasters_tabs'),
+                        tabs = tabs_parent.find('.cmsmasters_tabs_wrap'),
+                        index = $this.parents('li').index();
+
+					tabs_parent.find('.cmsmasters_tabs_list > .current_tab').removeClass('current_tab');
+					$this.parents('li').addClass('current_tab');
+					tabs.find('.cmsmasters_tab').not(':eq(' + index + ')').slideUp('fast', function () {
+						$this.removeClass('active_tab');
+					});
+					tabs.find('.cmsmasters_tab:eq(' + index + ')').slideDown('fast', function () {
+						$this.addClass('active_tab');
+					});
+					return false;
+				}
+			});
+		}
+	}
 });
 
 function doSticky() {
