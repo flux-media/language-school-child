@@ -9,6 +9,9 @@
  * 
  */
 
+// TODO: Find out if it's okay to do so.
+require_once(dirname(__FILE__).'/avengerschool/ASDate.php');
+
 add_action( 'after_setup_theme', 'child_theme_setup' );
 function child_theme_setup() {
     load_child_theme_textdomain('language-school-child', get_stylesheet_directory().'/');
@@ -426,21 +429,8 @@ function my_woocommerce_learnpress($atts, $content = null) {
 		$out .= "<div class=\"lpr_course_subtitle\">" . nl2br(get_the_excerpt( $product_id )) . "</div>";
 		$out .= "</div>";
 
-		// 2016.04.30 PM 7:30 -> 2016.04.30 7:30 PM
-		$thedate = $date;
-		$thedate = preg_replace("/([0-9.]+) ([ap]m) ([0-9:]+)/i", "$1 $3 $2", $thedate);
-		$start_at = DateTime::createFromFormat('Y.m.d g:i A', $thedate, new DateTimeZone('Asia/Seoul'));
-		$now = new DateTime('now', new DateTimeZone('Asia/Seoul'));
-		$is_past = false;
-		if ($start_at === false) {
-			// Let $is_past be false.
-		} else {
-			$interval_in_sec = $start_at->getTimeStamp() - $now->getTimeStamp();
-			// TODO: 7200?
-			if ($interval_in_sec < 7200) {
-				$is_past = true;
-			}
-		}
+		$as_date = new ASDate($date);
+		$is_past = $as_date->is_past();
 
 		$regular_price = get_post_meta( $product_id, '_regular_price', true );
 		$sale_price = get_post_meta( $product_id, '_sale_price', true );
