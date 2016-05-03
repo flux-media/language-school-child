@@ -9,6 +9,7 @@
  */
 
 var domain = 'https://avengerschool.com/';
+var youShouldAgree = '약관에 동의하셔야 합니다.';
 
 "use strict";
 
@@ -66,13 +67,39 @@ jQuery(document).ready(function() {
 
 	/* Agree? */
 	jQuery('form.register').on('submit', function(e) {
-		if (jQuery('#agree').is(':checked')) {
+		var $agree = jQuery('#agree');
+		if ($agree.is(':checked')) {
 			return true;
 		} else {
-			alert('약관에 동의하셔야 합니다.');
+			alert(youShouldAgree);
+			$agree.focus();
 			return false;
 		}
 	});
+
+	/* Agree on checkout? */
+	jQuery('.checkout.woocommerce-checkout').on('submit', function(e) {
+		var $inputCheckbox = jQuery('input.input-checkbox[name=terms]');
+		if ($inputCheckbox.length > 0) {
+			if ($inputCheckbox.is(':checked')) {
+				return true;
+			} else {
+				// TODO: Which is better?
+				// alert(youShouldAgree);
+				jQuery(document).on('checkout_error', function() {
+					var $errorBox = jQuery('<div/>');
+					$errorBox.addClass('woocommerce-error');
+					$errorBox.text(youShouldAgree);
+					$errorBox.insertBefore('.woocommerce-checkout');
+					$inputCheckbox.focus();
+				});
+			}
+		}
+	});
+
+	/* Agree on register-for-course? */
+	jQuery('#agree-on-register-for-courses').find('.wpcf7-list-item-label')
+		.html('본인은 <a href="https://avengerschool.com/terms/" target="_blank">이용약관</a>을 읽고 수락합니다');
 
 	/* Number of students event listener */
 	var $numberOfStudents = jQuery('#number-of-students'),

@@ -15,7 +15,7 @@ Tags: white, light, dark, one-column, two-columns, three-columns, four-columns, 
 
 @import url(https://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
-body {
+body, a {
 	font-family: 'Nanum Gothic', sans-serif !important;
 }
 
@@ -525,6 +525,15 @@ label.label-agree {
 /* Cancel Language School style on Woocommerce style. */
 .woocommerce .order_details li:first-child {
     padding: 10px 2em 0 0;
+}
+/* Emphasize terms on checkout. */
+p.wc-terms-and-conditions, p.wc-terms-and-conditions a {
+	font-size: 18px !important;
+	font-weight: bold !important;
+}
+/* Anchors always matter. */
+span.wpcf7-list-item-label a {
+	font-size: 18px !important;
 }
 
 /* TODO: Should I? */
