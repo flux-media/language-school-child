@@ -21,6 +21,7 @@ $cmsmasters_option = language_school_get_global_options();
 <meta charset="<?php bloginfo('charset'); ?>" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <meta name="google-site-verification" content="CBeJ1mnatITQVLhBCIbFBKzuLbi7T4BaXVKDcfMlAa8" />
+<meta name="naver-site-verification" content="65d459042d092543cca4ce0d8a8664f057689179"/>
 <link rel="profile" href="http://gmpg.org/xfn/11" />
 <link rel="pingback" href="<?php esc_url(bloginfo('pingback_url')); ?>" />
 <?php 
