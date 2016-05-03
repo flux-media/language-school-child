@@ -163,6 +163,7 @@ body {
 
 .cmsmasters_profile.vertical .profile .entry-content a {
 	font-size: 18px;
+	font-family: 'Nanum Gothic', sans-serif !important;
 }
 
 @media only screen and (max-width: 768px) {
