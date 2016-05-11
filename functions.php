@@ -9,8 +9,8 @@
  * 
  */
 
-// TODO: Find out if it's okay to do so.
-require_once(dirname(__FILE__).'/avengerschool/ASDate.php');
+require_once(dirname(__FILE__).'/avengerschool/ASProduct.php');
+require_once(dirname(__FILE__).'/avengerschool/ASRefund.php');
 
 add_action( 'after_setup_theme', 'child_theme_setup' );
 function child_theme_setup() {
@@ -175,104 +175,40 @@ function on_order_complete( $order_id ) {
 	}
 }
 
+// TODO: Deprecate when contact form is no longer used as payment means.
 function send_registration_feedback() {
 	// Get parameters.
 	$admin_email = get_option('admin_email');
-	$merchant_uid = $_POST['merchant_uid'];
 
 	// Initialize SMS module.
 	include(dirname(__FILE__) . '/api.class.php');
 	$api = new gabiaSmsApi();
 	$admin_tel = $api->getAdminTel();
 
-	// From Iamport.
-	if ($merchant_uid) {
-		// TODO: Double-check the price of order.
-
-		$status = $_POST['status']; // Either 'success' or 'failure'.
-		$thankyou_url = $_POST['thankyou_url'];
-
-		// Get contacts by merchant_uid.
-		$args = array(
-			'post_type' => 'iamport_payment',
-			'meta_query' => array(
-				array(
-					'key' => 'order_uid',
-					'value' => $merchant_uid,
-				)
-			)
-		);
-		$posts_list = get_posts($args);
-		if ($posts_list) {
-			$post_id = $posts_list[0]->ID;
-			$email = get_post_meta($post_id, 'buyer_email', true);
-			$tel = get_post_meta($post_id, 'buyer_tel', true);
-			$name = get_post_meta($post_id, 'buyer_name', true);
-			$amount = get_post_meta($post_id, 'order_amount', true);
-			$course_title = get_the_title($post_id);
-		} else {
-			// TODO: Why no postious?
-			wp_mail($admin_email, '[어벤져스쿨] merchant_uid가 존재하지 않음.', '이유는 모름. 아임포트에게 연락해봐야 함. Merchant Uid: ' . $merchant_uid);
-			return;
-		}
-
-		// Send e-mail and SMS.
-		if ($status == 'success') {
-			wp_mail($email, '[어벤져스쿨] 성공적으로 강연 입금 및 등록이 완료되었습니다.',
-				'결제 번호: ' . $merchant_uid .  "\n" .
-				'강의 제목: ' . $course_title . "\n" .
-				'수강자 이름: ' . $name .  "\n" .
-				'결제 금액: ' . $amount .  "\n" . 
-				'감사합니다.' . "\n" .
-				'- 어벤져스쿨.' . "\n");
-			$message = '<' . $course_title . '> 강연 입금 및 등록이 완료되었습니다. 감사합니다. - 어벤져스쿨';
-			if (mb_strlen($message, 'UTF-8') > 45) {
-				$result = $api->lms_send($tel, $admin_tel, $message);
-			} else {
-				$result = $api->sms_send($tel, $admin_tel, $message);
-			}
-			if ($result == gabiaSmsApi::$RESULT_OK) {
-			} else {
-				wp_mail($admin_email, '[어벤져스쿨] 문자 전송 실패. (아임포트)', 'Merchant Uid: ' . $merchant_uid . "\n" .
-					$api->getResultCode() . " : " . $api->getResultMessage() . ', Payment ID: ' . $post_id );
-			}
-		} else if ($status == 'failure') {
-			wp_mail($email, '[어벤져스쿨] 결제에 실패했습니다.',
-				'결제 번호: ' . $merchant_uid .  "\n" .
-				'강의 제목: ' . get_post_title($post_id) .  "\n" .
-				'- 어벤져스쿨.' . "\n");
-			wp_mail($admin_email, '[어벤져스쿨] 결제에 실패했습니다.',
-				'결제 번호: ' . $merchant_uid .  "\n" .
-				'강의 제목: ' . get_post_title($post_id) .  "\n" .
-				'- 어벤져스쿨.' . "\n");
-		}
-	}
 	// From contact form.
-	else {
-		$email = $_POST['email'];
-		$tel = $_POST['tel'];
-		$course_title = $_POST['course_title'];
-		$name = $_POST['name'];
-		$amount = $_POST['amount'];
+	$email = $_POST['email'];
+	$tel = $_POST['tel'];
+	$course_title = $_POST['course_title'];
+	$name = $_POST['name'];
+	$amount = $_POST['amount'];
 
-		wp_mail($email, '[어벤져스쿨] 성공적으로 강연 등록이 완료되었습니다.',
-			'강의 제목: ' . $course_title . "\n" .
-			'수강자 이름: ' . $name .  "\n" .
-			'결제 금액: ' . $amount .  "\n" . 
-			$api->getAdminAccount() . "\n" .
-			'입급 전 정원 초과시 자동 취소되오니 빠른 결제 부탁드립니다.' . "\n" . 
-			'- 어벤져스쿨.');
-		$message = '<' . $course_title . '> 강연 등록이 완료되었습니다. 입급 전 정원 초과시 자동 취소되오니 빠른 결제 부탁드립니다. - 어벤져스쿨';
-		$result = $api->lms_send($tel, $admin_tel, $message);
-		if ($result == gabiaSmsApi::$RESULT_OK) {
-			echo($p . " : " . $api->getResultMessage() . "<br>");
-			echo("이전 : " . $api->getBefore() . "<br>");
-			echo("이후 : " . $api->getAfter() . "<br>");
-		} else {
-			echo("error : " . $p . " - " . $api->getResultCode() . " - " . $api->getResultMessage() . "<br>");
-			wp_mail($admin_email, '[어벤져스쿨] 문자 전송 실패. (무통장입금)',
-					$api->getResultCode() . " : " . $api->getResultMessage()  . ', Payment ID: ' . $post_id);
-		}
+	wp_mail($email, '[어벤져스쿨] 성공적으로 강연 등록이 완료되었습니다.',
+		'강의 제목: ' . $course_title . "\n" .
+		'수강자 이름: ' . $name .  "\n" .
+		'결제 금액: ' . $amount .  "\n" . 
+		$api->getAdminAccount() . "\n" .
+		'입급 전 정원 초과시 자동 취소되오니 빠른 결제 부탁드립니다.' . "\n" . 
+		'- 어벤져스쿨.');
+	$message = '<' . $course_title . '> 강연 등록이 완료되었습니다. 입급 전 정원 초과시 자동 취소되오니 빠른 결제 부탁드립니다. - 어벤져스쿨';
+	$result = $api->lms_send($tel, $admin_tel, $message);
+	if ($result == gabiaSmsApi::$RESULT_OK) {
+		echo($p . " : " . $api->getResultMessage() . "<br>");
+		echo("이전 : " . $api->getBefore() . "<br>");
+		echo("이후 : " . $api->getAfter() . "<br>");
+	} else {
+		echo("error : " . $p . " - " . $api->getResultCode() . " - " . $api->getResultMessage() . "<br>");
+		wp_mail($admin_email, '[어벤져스쿨] 문자 전송 실패. (무통장입금)',
+				$api->getResultCode() . " : " . $api->getResultMessage()  . ', Payment ID: ' . $post_id);
 	}
 }
 
@@ -429,8 +365,8 @@ function my_woocommerce_learnpress($atts, $content = null) {
 		$out .= "<div class=\"lpr_course_subtitle\">" . nl2br(get_the_excerpt( $product_id )) . "</div>";
 		$out .= "</div>";
 
-		$as_date = new ASDate($date);
-		$is_past = $as_date->is_past();
+		$as_product = new ASProduct($date);
+		$is_past = $as_product->is_past();
 
 		$regular_price = get_post_meta( $product_id, '_regular_price', true );
 		$sale_price = get_post_meta( $product_id, '_sale_price', true );

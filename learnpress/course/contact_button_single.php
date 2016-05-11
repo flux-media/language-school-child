@@ -10,12 +10,6 @@
  
 learn_press_prevent_access_directly();
 
-global $course;
-$course_status = learn_press_get_user_course_status();
-// only show register button if user had not enrolled
-
-if ( ( '' == $course_status ) ) {
-
 do_action( 'learn_press_before_course_contact_button' );
 $button_text = apply_filters( 'learn_press_contact_button_text', esc_html__( 'Contact', 'language-school-child' ) );
 ?>
@@ -24,5 +18,3 @@ $button_text = apply_filters( 'learn_press_contact_button_text', esc_html__( 'Co
 		class="btn contact-button cmsmasters_button cmsmasters_but_bg_slide_left"><?php echo $button_text;?></a>
 </div>
 <?php do_action( 'learn_press_after_course_contact_button' );?>
-
-<?php } ?>

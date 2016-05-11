@@ -28,9 +28,9 @@ if ( !defined( 'ABSPATH' ) ) {
 
 	learn_press_get_template( 'course/price_single.php' );
 
-	// TODO: Get rid of register_button_single
 	learn_press_get_template( 'course/quick_buy_single.php' );
-	// learn_press_get_template( 'course/add_to_cart_single.php' );
+
+	// TODO: Get rid of register_button_single
 	learn_press_get_template( 'course/register_button_single.php' );
 
 	learn_press_get_template( 'course/contact_button_single.php' );

@@ -24,9 +24,9 @@ if ($product->product_type == 'bundle') {
 		$visible = false;
 	}
 } else {
-	$as_date = new ASDate(get_post_meta(get_the_ID(), 'as_date', true));
+	$as_product = new ASProduct( $product );
 
-	if ($as_date->is_past()) {
+	if ($as_product->is_past()) {
 		$visible = false;
 	} else {
 		if ($product->stock_status == 'instock') {

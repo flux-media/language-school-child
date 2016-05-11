@@ -12,7 +12,7 @@ learn_press_prevent_access_directly();
 
 global $product;
 do_action( 'learn_press_before_quick_buy_button' );
-$as_date = new ASDate(get_post_meta(get_the_ID(), 'as_date', true));
+$as_product = new ASProduct( $product );
 ?>
 <div class="cmsmasters_course_meta_item text-align-center">
 <?php
@@ -23,7 +23,7 @@ $as_date = new ASDate(get_post_meta(get_the_ID(), 'as_date', true));
 			echo '<a href="#" class="cmsmasters_button red">완료되었습니다.</a>';	
 		}
 	} else {
-		if ($as_date->is_past()) {
+		if ($as_product->is_past()) {
 			echo '<a href="#" class="cmsmasters_button red">완료되었습니다.</a>';
 		} else {
 			if ($product->stock > 0) {

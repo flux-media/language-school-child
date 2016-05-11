@@ -10,6 +10,8 @@
 
 var domain = 'https://avengerschool.com/';
 var youShouldAgree = '약관에 동의하셔야 합니다.';
+var processingRefund = '환불 처리 중... 잠시만 기다려주세요.';
+var successOnRefund = '환불이 정상적으로 처리되었습니다.';
 
 "use strict";
 
@@ -84,13 +86,11 @@ jQuery(document).ready(function() {
 			if ($inputCheckbox.is(':checked')) {
 				return true;
 			} else {
-				// TODO: Which is better?
-				// alert(youShouldAgree);
 				jQuery(document).on('checkout_error', function() {
 					var $errorBox = jQuery('<div/>');
 					$errorBox.addClass('woocommerce-error');
 					$errorBox.text(youShouldAgree);
-					$errorBox.insertBefore('.woocommerce-checkout');
+					$errorBox.insertBefore('form.woocommerce-checkout');
 					$inputCheckbox.focus();
 				});
 			}
@@ -217,6 +217,36 @@ jQuery(document).ready(function() {
 			});
 		}
 	}
+
+	/* Refund by customers */
+	jQuery('.button-product-refund').on('click', function(e) {
+		e.preventDefault();
+
+		var $this = jQuery(this), orderId = $this.data('order-id'),
+			$processing = jQuery('<span/>');
+		$processing.text(processingRefund);
+
+		$this.parent().append($processing);
+		$this.hide();
+
+		jQuery.ajax({
+			method: 'POST',
+			url: domain + 'wp-admin/admin-ajax.php',
+			data: {
+				action: 'refund_order',
+				order_id: orderId
+			},
+			
+			success: function(resp) {
+				if (resp.success == true) {
+					alert(successOnRefund);
+					document.location.reload(true);
+				} else {
+					alert(resp.data.error);
+				}
+			}
+		});
+	});
 });
 
 function doSticky() {

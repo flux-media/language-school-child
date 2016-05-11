@@ -12,7 +12,7 @@ learn_press_prevent_access_directly();
 
 global $product;
 do_action( 'learn_press_before_course_register_button' );
-$as_date = new ASDate(get_post_meta(get_the_ID(), 'as_date', true));
+$as_product = new ASProduct( $product );
 ?>
 <?php if ($product->product_type == 'bundle'): ?>
 <div class="cmsmasters_course_meta_item text-align-center">
@@ -23,7 +23,7 @@ $as_date = new ASDate(get_post_meta(get_the_ID(), 'as_date', true));
 			echo '<a href="#" class="cmsmasters_button red">완료되었습니다.</a>';
 		} ?>
 </div>
-<?php elseif (!$as_date->is_past()): ?>
+<?php elseif (!$as_product->is_past()): ?>
 <div class="cmsmasters_course_meta_item text-align-center">
 	<?php 
 		if ($product->stock > 0):

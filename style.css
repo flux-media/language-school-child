@@ -535,20 +535,3 @@ p.wc-terms-and-conditions, p.wc-terms-and-conditions a {
 span.wpcf7-list-item-label a {
 	font-size: 18px !important;
 }
-
-/* TODO: Should I? */
-.iamport-payment-box {
-	width: 291px !important;
-}
-.ui-dialog .ui-dialog-content {
-	width: 291px !important;	
-}
-.iamport-payment-box {
-	max-width: 340px; margin: 0 auto; border: 1px solid #efefef; padding: 10px 18px;
-}
-.iamport-payment-box label, .iamport-payment-box input, .iamport-payment-box select {
-	display: block; width: 99%
-}
-.iamport-payment-submit, .iamport-payment-link {
-	display: inline-block; padding: 6px; width: 80%; background-color: #24b294; color: #fff;
-}
