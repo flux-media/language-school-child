@@ -25,6 +25,21 @@ class ASProduct {
 		return $this->product->product_type == 'bundle';
 	}
 
+	public function is_reservation_over() {
+		$is_over = false;
+		
+		if ($this->date === false) {
+			// Let $is_past be false.
+		} else {
+			$diff = $this->get_diff_from_now();
+			if ($diff < $this->PAST_STANDARD_IN_SEC && $diff >= 0) {
+				$is_over = true;
+			}
+		}
+
+		return $is_over;
+	}
+
 	public function is_past() {
 		$is_past = false;
 		
@@ -32,7 +47,7 @@ class ASProduct {
 			// Let $is_past be false.
 		} else {
 			$diff = $this->get_diff_from_now();
-			if ($diff < $this->PAST_STANDARD_IN_SEC) {
+			if ($diff < 0) {
 				$is_past = true;
 			}
 		}

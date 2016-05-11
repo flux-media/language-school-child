@@ -26,7 +26,7 @@ if ($product->product_type == 'bundle') {
 } else {
 	$as_product = new ASProduct( $product );
 
-	if ($as_product->is_past()) {
+	if ($as_product->is_past() || $as_product->is_reservation_over()) {
 		$visible = false;
 	} else {
 		if ($product->stock_status == 'instock') {

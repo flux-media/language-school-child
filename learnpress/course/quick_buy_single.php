@@ -23,7 +23,9 @@ $as_product = new ASProduct( $product );
 			echo '<a href="#" class="cmsmasters_button red">완료되었습니다.</a>';	
 		}
 	} else {
-		if ($as_product->is_past()) {
+		if ($as_product->is_reservation_over()) {
+			echo '<a href="#" class="cmsmasters_button red">현장 등록 바랍니다.</a>';
+		} else if ($as_product->is_past()) {
 			echo '<a href="#" class="cmsmasters_button red">완료되었습니다.</a>';
 		} else {
 			if ($product->stock > 0) {
