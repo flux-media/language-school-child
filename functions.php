@@ -61,7 +61,7 @@ function as_duration() {
 	echo '<input type="hidden" name="eventmeta_noncename" id="eventmeta_noncename" value="' . 
 	wp_create_nonce( plugin_basename(__FILE__) ) . '" />';
 	$duration = get_post_meta($post->ID, 'as_duration', true);
-	echo '<input type="text" name="as_duration" value="' . htmlspecialchars($duration)  . '" class="widefat" />';	
+	echo '<input type="text" name="as_duration" value="' . htmlspecialchars($duration)  . '" class="widefat" />';
 }
 function as_location() {
 	global $post;
@@ -365,7 +365,7 @@ function my_woocommerce_learnpress($atts, $content = null) {
 		$out .= "<div class=\"lpr_course_subtitle\">" . nl2br(get_the_excerpt( $product_id )) . "</div>";
 		$out .= "</div>";
 
-		$as_product = new ASProduct($date);
+		$as_product = new ASProduct($product);
 		$is_past = $as_product->is_past();
 
 		$regular_price = get_post_meta( $product_id, '_regular_price', true );
