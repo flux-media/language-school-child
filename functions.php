@@ -409,15 +409,11 @@ function my_woocommerce_learnpress($atts, $content = null) {
 			$out .= '<div class="entry-meta cmsmasters_cource_cat">' . $categories . "</div>";
 		}
 		
-		// Removed rate.
 		$out .= '</div>' . "\n";
-		
-		// Removed footer.	
 		$out .= '</article>' . "\n";
 	
 		endwhile;
 	endif;
-	
 	wp_reset_postdata();
 	wp_reset_query();
 	
@@ -447,5 +443,96 @@ function cmsmasters_child_title($cmsmasters_id, $show = true) {
         return $out;
     }
 }
+
+// Send back ad banner image url(s) to PPSS.kr
+function get_ad_banner() {
+	header('Access-Control-Allow-Origin: http://ppss.kr');
+	$categories = urldecode($_GET['categories']);
+	if (strlen($categories) <= 0) {
+		return;
+	}
+
+	// Strip '[', ']' from the string, and explode it to an array.
+	$categories = substr($categories, 1, -1);
+	if (strlen($categories) <= 0) {
+		return;
+	}
+	$array_categories = explode(',', $categories);
+
+	// Get a category slug.
+	$category_slug = '';
+	foreach ($array_categories as $category) {
+		switch ($category) {
+			case '책':
+			case '학문':
+			case '인문':
+				$category_slug = 'writing';
+				break;
+
+			// 'business' has two choices...
+			case '비즈니스':
+				$category_slug = (bool) rand(0, 1)? 'business': 'marketing';
+				break;
+
+			case '생활':
+				$category_slug = 'business';
+				break;
+
+			case '경제':
+			case '투자':
+				$category_slug = 'economy';
+				break;
+
+			case 'IT':
+				$category_slug = 'marketing';
+				break;
+
+			case '사회':
+			case '교육':
+				$category_slug = 'hell-chosun';
+				break;
+		}
+	}
+	if (strlen($category_slug) <= 0) {
+		return;
+	}
+
+	// Get reservation-ready products of the category.
+	$args = array( 
+		'post_type' => 				'product', 
+		'orderby' => 				'date', 
+		'order' => 					'asc', 
+		'posts_per_page' => 		99
+	);
+	$args['tax_query'] = array( 
+		array( 
+			'taxonomy' => 'product_cat', 
+			'field' => 'slug', 
+			'terms' => $category_slug
+		)
+	);
+	$query = new WP_Query( $args );
+	$available_products = array();
+	if ($query->have_posts()) : 
+		while ($query->have_posts()) : $query->the_post();
+			$product = new WC_Product( get_the_ID() );
+			$as_product = new ASProduct( $product );
+
+			if (!$as_product->is_bundle() && !$as_product->is_past() && !$as_product->is_reservation_over()) {
+				array_push($available_products, $product);
+			}
+		endwhile;
+	endif;
+	wp_reset_postdata();
+	wp_reset_query();
+
+	// Select a random one (if many) and JSON-respond its banner url.
+	$index = rand(0, count($available_products) - 1);
+	$the_product = $available_products[$index];
+	$return = array('url' => wp_get_attachment_image_url(get_post_thumbnail_id($the_product->id), 'medium'));
+	wp_send_json_success($return);
+}
+add_action('wp_ajax_nopriv_get_ad_banner', 'get_ad_banner');
+add_action('wp_ajax_get_ad_banner', 'get_ad_banner');
 
 ?>
