@@ -466,11 +466,19 @@ function get_ad_banner() {
 			case '책':
 			case '학문':
 			case '인문':
+			case '역사':
+			case '영화':
 				$category_slug = 'writing';
 				break;
 
-			// 'business' has two choices...
+			case '사회':
+			case '시사':
+				$category_slug = (bool) rand(0, 1)? 'writing': 'hell-chosun';
+				break;
+
+			case '테크':
 			case '비즈니스':
+			case '인터뷰':
 				$category_slug = (bool) rand(0, 1)? 'business': 'marketing';
 				break;
 
@@ -480,21 +488,24 @@ function get_ad_banner() {
 
 			case '경제':
 			case '투자':
+			case '국제':
 				$category_slug = 'economy';
 				break;
 
 			case 'IT':
+			case '테크':
 				$category_slug = 'marketing';
 				break;
 
-			case '사회':
 			case '교육':
+			case '정치':
 				$category_slug = 'hell-chosun';
 				break;
+
+			default:
+				$array = ['writing', 'business', 'economy', 'marketing', 'hell-chosun'];
+				$category_slug = $array[array_rand($array, 1)];
 		}
-	}
-	if (strlen($category_slug) <= 0) {
-		return;
 	}
 
 	// Get reservation-ready products of the category.
@@ -506,8 +517,8 @@ function get_ad_banner() {
 	);
 	$args['tax_query'] = array( 
 		array( 
-			'taxonomy' => 'product_cat', 
-			'field' => 'slug', 
+			'taxonomy' => 'product_cat',
+			'field' => 'slug',
 			'terms' => $category_slug
 		)
 	);
@@ -518,7 +529,7 @@ function get_ad_banner() {
 			$product = new WC_Product( get_the_ID() );
 			$as_product = new ASProduct( $product );
 
-			if (!$as_product->is_bundle() && !$as_product->is_past() && !$as_product->is_reservation_over()) {
+			if ($product->stock > 0 && !$as_product->is_past() && !$as_product->is_reservation_over()) {
 				array_push($available_products, $product);
 			}
 		endwhile;
@@ -529,10 +540,16 @@ function get_ad_banner() {
 	// Select a random one (if many) and JSON-respond its banner url.
 	$index = rand(0, count($available_products) - 1);
 	$the_product = $available_products[$index];
-	$return = array('url' => wp_get_attachment_image_url(get_post_thumbnail_id($the_product->id), 'medium'));
+	$return = array(
+		'description' => $the_product->get_title(),
+		'thumbnail' => wp_get_attachment_image_url(get_post_thumbnail_id($the_product->get_id()), 'medium'),
+		'title' => 'ㅍㅍㅅㅅ의 현업 전문가 실무 특강',
+		'url' => get_permalink($the_product->get_id())
+	);
 	wp_send_json_success($return);
 }
-add_action('wp_ajax_nopriv_get_ad_banner', 'get_ad_banner');
-add_action('wp_ajax_get_ad_banner', 'get_ad_banner');
+// TODO: Activate if necessary.
+// add_action('wp_ajax_nopriv_get_ad_banner', 'get_ad_banner');
+// add_action('wp_ajax_get_ad_banner', 'get_ad_banner');
 
 ?>
