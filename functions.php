@@ -33,7 +33,7 @@ function theme_enqueue_scripts() {
 	wp_enqueue_script( 'masonry' );
 	wp_enqueue_script( 'imagesLoaded', get_stylesheet_directory_uri(). '/js/imagesloaded.pkgd.min.js', array('masonry'), false, true );
 	wp_enqueue_script( 'jquery-ui', get_stylesheet_directory_uri() . '/js/jquery-ui.min.js', array('jquery'), false, true );
-	wp_enqueue_script( 'child_script', get_stylesheet_directory_uri() . '/js/jquery.script.js', array('jquery'), false, true );
+	wp_enqueue_script( 'child_script', get_stylesheet_directory_uri() . '/js/jquery.script.js', array('jquery'), '1.0.0', true );
 }
 
 add_action('after_setup_theme', 'my_child_shortcodes_setup');

@@ -2,3 +2,5 @@
 // SMS module.
 api.class.php
 lib/*
+
+.idea/*
