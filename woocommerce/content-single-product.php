@@ -133,7 +133,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<!-- Related courses -->
 			<div class="related-courses-wrapper">
 				<?php $category = wp_get_post_terms(get_the_ID(), 'product_cat'); ?>
-				<?php echo do_shortcode('[woocommerce_learnpress orderby="date" order="DESC" categories="' . $category[0]->slug . '" count="12" columns="4" classes="related-courses"]'); ?>
+				<?php echo do_shortcode('[woocommerce_learnpress orderby="date" order="DESC" categories="' . $category[0]->slug . '" count="12" columns="4" hidepast="true" classes="related-courses"]'); ?>
 			</div>
 		</article><!-- #post-## -->
 	</div>

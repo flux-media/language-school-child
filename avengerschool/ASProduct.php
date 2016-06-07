@@ -55,6 +55,14 @@ class ASProduct {
 		return $is_past;
 	}
 
+	public function is_available() {
+		$result = true;
+		if ($this->product->stock_status != 'instock' || $this->is_reservation_over() || $this->is_past()) {
+			$result = false;
+		}
+		return $result;
+	}
+
 	public function get_refund_rate() {
 		$rate = 1;
 

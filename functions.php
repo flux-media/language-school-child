@@ -285,7 +285,8 @@ function my_woocommerce_learnpress($atts, $content = null) {
 		'categories' => 	'', 
 		'count' => 			'', 
 		'columns' => 		'', 
-		'classes' => 		'' 
+		'classes' => 		'',
+		'hidepast' => 		''
 	) );
 	
 	$shortcode_name = 'learnpress';
@@ -303,12 +304,6 @@ function my_woocommerce_learnpress($atts, $content = null) {
 	extract(shortcode_atts($new_atts, $atts));
 	
 	$unique_id = uniqid();
-	
-	if ($columns == '4' || $columns == '5') {
-		$course_thumb = 'cmsmasters-square-thumb';
-	} else {
-		$course_thumb = 'cmsmasters-project-thumb';
-	}
 	
 	$out = '<div id="cmsmasters_learnpress_shortcode_' . $unique_id . '" class="cmsmasters_learnpress_shortcode' . 
 	(($columns != '') ? ' cmsmasters_' . $columns : '') . 
@@ -341,6 +336,11 @@ function my_woocommerce_learnpress($atts, $content = null) {
 	
 		$product_id = get_the_ID();
 		$product = new WC_Product( $product_id );
+		$as_product = new ASProduct($product);
+
+		if ($hidepast != '' && !$as_product->is_available()) {
+			continue;
+		}
 		
 		$categories = get_the_term_list( $product_id, 'product_cat', '', ', ', '' );
 		$cmsmasters_title = cmsmasters_child_title( $product_id, false );
@@ -365,7 +365,6 @@ function my_woocommerce_learnpress($atts, $content = null) {
 		$out .= "<div class=\"lpr_course_subtitle\">" . nl2br(get_the_excerpt( $product_id )) . "</div>";
 		$out .= "</div>";
 
-		$as_product = new ASProduct($product);
 		$is_past = $as_product->is_past();
 
 		$regular_price = get_post_meta( $product_id, '_regular_price', true );
