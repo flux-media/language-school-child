@@ -107,24 +107,6 @@ function replaceUrlParam(url, paramName, paramValue) {
             }
         });
 
-        /* Agree on checkout? */
-        $('.checkout.woocommerce-checkout').on('submit', function (e) {
-            var $inputCheckbox = $('input.input-checkbox[name=terms]');
-            if ($inputCheckbox.length > 0) {
-                if ($inputCheckbox.is(':checked')) {
-                    return true;
-                } else {
-                    $(document).on('checkout_error', function () {
-                        var $errorBox = $('<div/>');
-                        $errorBox.addClass('woocommerce-error');
-                        $errorBox.text(youShouldAgree);
-                        $errorBox.insertBefore('form.woocommerce-checkout');
-                        $inputCheckbox.focus();
-                    });
-                }
-            }
-        });
-
         /* Agree on register-for-course? */
         $('#agree-on-register-for-courses').find('.wpcf7-list-item-label')
             .html('본인은 <a href="https://avengerschool.com/terms/" target="_blank">이용약관</a>을 읽고 수락합니다');
