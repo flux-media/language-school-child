@@ -138,3 +138,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</article><!-- #post-## -->
 	</div>
 </div>
+
+<?php
+	do_action('woocommerce_after_single_product');
+?>
+
