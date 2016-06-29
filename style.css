@@ -12,189 +12,192 @@ Text Domain: language-school-child
 Domain Path: /framework/languages
 Tags: white, light, dark, one-column, two-columns, three-columns, four-columns, left-sidebar, right-sidebar, fixed-layout, responsive-layout, custom-background, custom-colors, custom-header, custom-menu, editor-style, featured-image-header, featured-images, flexible-header, full-width-template, microformats, post-formats, rtl-language-support, sticky-post, theme-options, threaded-comments, translation-ready
 */
-
 @import url(https://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
 body, a {
-	font-family: 'Nanum Gothic', sans-serif !important;
+    font-family: 'Nanum Gothic', sans-serif !important;
 }
 
 .cmsmasters_learnpress_shortcode.cmsmasters_4 .lpr_course_post {
-	width: 33.3% !important;
+    width: 33.3% !important;
 }
+
 @media only screen and (max-width: 1619px) {
-	.cmsmasters_learnpress_shortcode.cmsmasters_4 .lpr_course_post {
-		width: 33.3% !important;
-	}
+    .cmsmasters_learnpress_shortcode.cmsmasters_4 .lpr_course_post {
+        width: 33.3% !important;
+    }
 }
+
 @media only screen and (max-width: 950px) {
-	.cmsmasters_learnpress_shortcode.cmsmasters_4 .lpr_course_post {
-	    width: 49.9% !important;
-	}
+    .cmsmasters_learnpress_shortcode.cmsmasters_4 .lpr_course_post {
+        width: 49.9% !important;
+    }
 }
+
 @media only screen and (max-width: 540px) {
-	.cmsmasters_learnpress_shortcode.cmsmasters_4 .lpr_course_post {
-		width: 100% !important;
-	}
+    .cmsmasters_learnpress_shortcode.cmsmasters_4 .lpr_course_post {
+        width: 100% !important;
+    }
 }
 
 .cmsmasters_learnpress_shortcode .lpr_course_post .cmsmasters_course_price {
-	background-color: #01a2a6;
-	color: white;
+    background-color: #01a2a6;
+    color: white;
 }
 
 .cmsmasters_img_link.preloader {
-	height: 100%;
-	padding-bottom: 0 !important;
+    height: 100%;
+    padding-bottom: 0 !important;
 }
 
 .preloader .full-width {
-	position: static !important;
+    position: static !important;
 }
 
 .text-align-center {
-	text-align: center;
+    text-align: center;
 }
 
 .lpr_course_author {
-	float: left;
-	margin-bottom: 1em;
-	color: #3d3d47;
+    float: left;
+    margin-bottom: 1em;
+    color: #3d3d47;
 }
 
 .lpr_course_date {
-	float: right;
+    float: right;
 }
 
 .lpr_course_subtitle {
-	clear: both;
-	margin-bottom: 1em;
-	color: #3d3d47;
-	font-weight: bold;
-	min-height: 40px;
+    clear: both;
+    margin-bottom: 1em;
+    color: #3d3d47;
+    font-weight: bold;
+    min-height: 40px;
 }
 
 /* For main page slider */
 .full-width .cmsmasters_row_inner {
-	width: 100%;
-	padding: 0;
+    width: 100%;
+    padding: 0;
 }
 
 #header {
-	box-shadow: none;
-	-webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
 }
 
 .header_mid {
-	padding: 1em;
+    padding: 1em;
 }
 
 #page.cmsmasters_heading_after_header #middle {
-	/*padding-top: 190px !important;*/
+    /*padding-top: 190px !important;*/
 }
 
 .entry-header h2 {
-	font-size: 36px;
-	font-weight: 700;
-	line-height: 1.2;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.2;
 }
 
 .course-description h3 {
-	font-size: 24px;
-	font-weight: 700;
+    font-size: 24px;
+    font-weight: 700;
 }
 
 .course-description p {
-	font-size: 18px;
-	color: #3d3d47;
+    font-size: 18px;
+    color: #3d3d47;
     line-height: 1.675;
 }
 
 .course-description p a {
-	font-size: 18px;
+    font-size: 18px;
 }
 
 .cmsmasters_profile.vertical {
-	border-top: 2px solid gainsboro;
+    border-top: 2px solid gainsboro;
     padding-top: 40px;
 }
 
 .cmsmasters_profile.vertical .profile {
-	border: 0;
-	padding: 0;
+    border: 0;
+    padding: 0;
 }
 
 .cmsmasters_profile.vertical .profile:before {
-	display: none;
+    display: none;
 }
 
 .cmsmasters_profile.vertical .profile .pl_img {
-	width: 19%;
-	padding: 0 25px 0 0;
-	vertical-align: top;
+    width: 19%;
+    padding: 0 25px 0 0;
+    vertical-align: top;
 }
 
 .cmsmasters_profile.vertical .profile .entry-title a {
-	font-size: 18px;
+    font-size: 18px;
 }
 
 .cmsmasters_profile.vertical .profile .pl_social {
-	display: inline;
-	margin: 0 0 0 5px;
+    display: inline;
+    margin: 0 0 0 5px;
 }
 
 .cmsmasters_profile.vertical .profile.shortcode_animated .pl_social .pl_social_list {
-	display: inline;
+    display: inline;
 }
 
 .cmsmasters_profile.vertical .profile .pl_content {
-	display: block;
-	padding: 0;
-	width: 100%;
+    display: block;
+    padding: 0;
+    width: 100%;
 }
 
 .cmsmasters_profile.vertical .profile .entry-content {
-	width: 100%;
-	display: block;
-	color: #3d3d47;
-	font-size: 18px;
-	line-height: 1.675;
+    width: 100%;
+    display: block;
+    color: #3d3d47;
+    font-size: 18px;
+    line-height: 1.675;
 }
 
 .cmsmasters_profile.vertical .profile .entry-content a {
-	font-size: 18px;
-	font-family: 'Nanum Gothic', sans-serif !important;
+    font-size: 18px;
+    font-family: 'Nanum Gothic', sans-serif !important;
 }
 
 @media only screen and (max-width: 768px) {
-	html #page .cmsmasters_profile.vertical .profile .entry-content {
-		text-align: left !important;
-	}
+    html #page .cmsmasters_profile.vertical .profile .entry-content {
+        text-align: left !important;
+    }
 }
 
 .cmsmasters_tabs.tabs_mode_tab .cmsmasters_tabs_list .cmsmasters_tabs_list_item {
-	width: 16.66%;
+    width: 16.66%;
 }
 
 .main-woocommerce.cmsmasters_tabs.tabs_mode_tab .cmsmasters_tabs_list .cmsmasters_tabs_list_item {
-	width: 12.48%;
+    width: 12.48%;
 }
 
 .cmsmasters_tabs .cmsmasters_tabs_list .cmsmasters_tabs_list_item > a {
-	font-size: 16px !important;
+    font-size: 16px !important;
 }
 
 @media only screen and (max-width: 768px) {
-	.cmsmasters_tabs.tabs_mode_tab .cmsmasters_tabs_list .cmsmasters_tabs_list_item {
-		width: 100%;
-	}
-	.main-woocommerce.cmsmasters_tabs.tabs_mode_tab .cmsmasters_tabs_list .cmsmasters_tabs_list_item {
-		width: 100%;
-	}
+    .cmsmasters_tabs.tabs_mode_tab .cmsmasters_tabs_list .cmsmasters_tabs_list_item {
+        width: 100%;
+    }
+
+    .main-woocommerce.cmsmasters_tabs.tabs_mode_tab .cmsmasters_tabs_list .cmsmasters_tabs_list_item {
+        width: 100%;
+    }
 }
 
 .cmsmasters_learnpress_shortcode .lpr_course_post .lpr_course_inner {
-	padding: 15px 15px 20px !important;
+    padding: 15px 15px 20px !important;
 }
 
 .lpr_course_inner h6 a {
@@ -203,41 +206,44 @@ body, a {
 }
 
 @media only screen and (min-width: 951px) and (max-width: 1619px) {
-	.lpr_course_inner h6 a {
-		font-size: 19px !important;
-	}
-	.lpr_course_subtitle {
-		font-size: 11px !important;
-	}
+    .lpr_course_inner h6 a {
+        font-size: 19px !important;
+    }
+
+    .lpr_course_subtitle {
+        font-size: 11px !important;
+    }
 }
 
 .header_mid {
-	padding-top: 40px;
+    padding-top: 40px;
 }
 
 .header_mid .header_mid_inner .logo_wrap {
-	width: 294px !important;
+    width: 294px !important;
 }
 
 @media only screen and (max-width: 330px) {
-	html #header .header_mid .header_mid_inner {
-		width: 95% !important;
-	}
-	.header_mid .logo_wrap {
-		position: static !important;
-	}
-	.header_mid .logo_wrap .logo img {
-		bottom: auto;
-	}
+    html #header .header_mid .header_mid_inner {
+        width: 95% !important;
+    }
+
+    .header_mid .logo_wrap {
+        position: static !important;
+    }
+
+    .header_mid .logo_wrap .logo img {
+        bottom: auto;
+    }
 }
 
 .header_mid .logo_wrap {
-	float: right;
+    float: right;
 }
 
 .header_mid .resp_mid_nav_wrap .resp_mid_nav {
-	width: 45px;
-	height: 30px;
+    width: 45px;
+    height: 30px;
 }
 
 .header_mid .resp_mid_nav_wrap .resp_mid_nav:before {
@@ -246,107 +252,104 @@ body, a {
 }
 
 @media only screen and (max-width: 540px) {
-	html #page .cmsmasters_profile.vertical .profile .pl_img {
-		width: 45% !important;
-	}
+    html #page .cmsmasters_profile.vertical .profile .pl_img {
+        width: 45% !important;
+    }
 }
 
 .cmsmasters_button.red {
-	background-color: #fe5969 !important;
-	color: white !important;
-	cursor: not-allowed;
+    background-color: #fe5969 !important;
+    color: white !important;
+    cursor: not-allowed;
 }
 
 .cmsmasters_button.red:hover {
-	background-color: white !important;
-	color: #fe5969 !important;
-	border-color: #fe5969 !important;
+    background-color: white !important;
+    color: #fe5969 !important;
+    border-color: #fe5969 !important;
 }
 
 .take-course.cmsmasters_button {
-	background-color: #01a2a6 !important;
-	color: white !important;
+    background-color: #01a2a6 !important;
+    color: white !important;
 }
 
 .take-course.cmsmasters_button:hover {
-	background-color: white !important;
+    background-color: white !important;
     color: #01a2a6 !important;
     border-color: #01a2a6 !important;
 }
 
 .contact-button.cmsmasters_button:hover {
-	background-color: white !important;
+    background-color: white !important;
     color: #01a2a6 !important;
     border-color: #01a2a6 !important;
 }
 
 .cmsmasters_course_sidebar {
-	font-size: 18px;
+    font-size: 18px;
 }
+
 .cmsmasters_course_sidebar a, .cmsmasters_course_sidebar button {
-	font-size: 18px;
+    font-size: 18px;
 }
 
 .contactus-email {
-	float: left;
-	width: 20%;
-	margin-right: 5%;
+    float: left;
+    width: 20%;
+    margin-right: 5%;
 }
+
 .contactus-name {
-	float: left;
-	width: 10%;
-	margin-right: 5%;
+    float: left;
+    width: 10%;
+    margin-right: 5%;
 }
+
 .contactus-title {
-	float: left;
-	width: 60%;
+    float: left;
+    width: 60%;
 }
-.contactius-content, .register-content {
-	clear: both;
+
+.contactus-content, .register-content {
+    clear: both;
 }
 
 @media only screen and (max-width: 768px) {
-	.contactus-email, .contactus-name, .contactus-title {
-		width: 100%;
-		margin: 0;
-		float: none;
-	}
+    .contactus-email, .contactus-name, .contactus-title {
+        width: 100%;
+        margin: 0;
+        float: none;
+    }
 }
 
-.register-name {
-	float: left;
-	width: 30%;
-	margin-right: 5%;
+.register-name, .register-email, .register-kakao-id, .register-company, .register-job {
+    float: left;
+    width: 30%;
+    margin-right: 5%;
 }
 
-.register-email {
-	float: left;
-	width: 30%;
-	margin-right: 5%;
-}
-
-.register-phone-number {
-	float: left;
-	width: 30%;
-}
-
-.register-kakao-id {
-	float: left;
-	width: 30%;
-	margin-right: 5%;
+.register-phone-number, .register-years {
+    float: left;
+    width: 30%;
 }
 
 .register-course-name {
-	float: left;
-	width: 65%;
+    float: left;
+    width: 65%;
 }
 
 @media only screen and (max-width: 768px) {
-	.register-email, .register-name, .register-phone-number, .register-kakao-id, .register-course-name {
-		width: 100%;
-		margin: 0;
-		float: none;
-	}
+    .register-email, .register-name, .register-phone-number, .register-kakao-id, .register-course-name,
+    .register-company, .register-job, .register-years {
+        width: 100%;
+        margin: 0;
+        float: none;
+    }
+}
+
+.register-description {
+    font-size: 0.7em;
 }
 
 .lrp-form {
@@ -356,136 +359,144 @@ body, a {
 }
 
 .fixed_header #header {
-	position: static;
+    position: static;
 }
 
 #page.cmsmasters_heading_after_header #middle {
-	padding: 0 !important;
+    padding: 0 !important;
 }
 
 @media only screen and (max-width: 1024px) {
-	html #header .header_mid .resp_mid_nav_wrap {
-		display: none !important;
-	}
-	html #header .header_mid .mid_nav_wrap nav {
-		display: block !important;
-	}
-	.cmsmasters_heading_wrap {
-		margin-top: 0 !important;
-	}
+    html #header .header_mid .resp_mid_nav_wrap {
+        display: none !important;
+    }
+
+    html #header .header_mid .mid_nav_wrap nav {
+        display: block !important;
+    }
+
+    .cmsmasters_heading_wrap {
+        margin-top: 0 !important;
+    }
 }
 
 html .cmsmasters_color_scheme_bottom a {
-	color: white !important;
-	font-size: 16px;
+    color: white !important;
+    font-size: 16px;
 }
 
 html .cmsmasters_color_scheme_bottom a.yellow-id {
-	color: yellow !important;
+    color: yellow !important;
 }
 
 html .bottom_bg {
-	padding: 2em;
+    padding: 2em;
 }
 
 .widget {
-	padding: 0;
+    padding: 0;
 }
 
 .sticky {
-	width: 291px !important;
-	position: fixed !important;
-	top: 5%;
-	right: 16%;
+    width: 291px !important;
+    position: fixed !important;
+    top: 5%;
+    right: 16%;
 }
 
 @media only screen and (min-width: 1601px) {
-	.sticky {
-		width: 359px !important;
-	}
+    .sticky {
+        width: 359px !important;
+    }
 }
 
 span.bold {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 span.line-through {
-	text-decoration: line-through;
+    text-decoration: line-through;
 }
 
 .float-right {
-	float: right;
+    float: right;
 }
 
 .cmsmasters_learnpress_shortcode .lpr_course_post .cmsmasters_course_price.original_price {
-	background-color: white;
-	color: #3d3d47;
+    background-color: white;
+    color: #3d3d47;
 }
 
 .cmsmasters_learnpress_shortcode .lpr_course_post .lpr_course_title {
-	min-height: 72px;
+    min-height: 72px;
 }
 
 .display-mobile {
-	display: none;
-	visibility: none;
+    display: none;
+    visibility: none;
 }
+
 @media only screen and (max-width: 540px) {
-	.display-mobile {
-		display: block;
-		visibility: visible;
-	}
+    .display-mobile {
+        display: block;
+        visibility: visible;
+    }
 }
 
 .bottom_inner aside {
-	margin: 0em 2%;
+    margin: 0em 2%;
 }
 
 @media only screen and (max-width: 950px) {
-	.bottom_inner aside {
-		margin: 2em 2%;
-	}
+    .bottom_inner aside {
+        margin: 2em 2%;
+    }
 }
 
 .related-courses-wrapper {
-	margin: 0 -20px;
+    margin: 0 -20px;
 }
+
 .related-courses {
-	width: 100%;
-	float: left;
-	margin: 0 !important;
+    width: 100%;
+    float: left;
+    margin: 0 !important;
 }
 
 @media only screen and (max-width: 540px) {
-	.cmsmasters_learnpress_shortcode .lpr_course_post {
-		padding: 0 0 40px !important;
-	}
-	.cmsmasters_learnpress_shortcode {
-		margin: 0 !important;
-	}
-	.related-courses-wrapper {
-		margin: 0;
-	}
+    .cmsmasters_learnpress_shortcode .lpr_course_post {
+        padding: 0 0 40px !important;
+    }
+
+    .cmsmasters_learnpress_shortcode {
+        margin: 0 !important;
+    }
+
+    .related-courses-wrapper {
+        margin: 0;
+    }
 }
 
 .hidden {
-	display: none;
-	visibility: none;
+    display: none;
+    visibility: none;
 }
 
 #learn_press_payment_form {
-	display: none;
+    display: none;
 }
 
 /* Woocommerce */
 div.quantity {
-	text-align: right;
+    text-align: right;
 }
+
 div.quantity input {
-	width: 5.631em !important;
+    width: 5.631em !important;
 }
+
 a.add_to_cart_button {
-	-webkit-transition: all .3s ease-in-out !important;
+    -webkit-transition: all .3s ease-in-out !important;
     -moz-transition: all .3s ease-in-out !important;
     -ms-transition: all .3s ease-in-out !important;
     -o-transition: all .3s ease-in-out !important;
@@ -507,6 +518,7 @@ a.add_to_cart_button {
     position: relative !important;
     border-radius: 20px !important;
 }
+
 a.add_to_cart_button:hover {
     background-color: white !important;
     color: #01a2a6 !important;
@@ -514,24 +526,28 @@ a.add_to_cart_button:hover {
 }
 
 label.label-agree {
-	display: inline !important;
+    display: inline !important;
 }
+
 /* Misc. explanation for collection personal info on checkout page. */
 .woocommerce form h3.form-row {
     font-size: 11px !important;
     line-height: 14px !important;
     width: 98% !important;
 }
+
 /* Cancel Language School style on Woocommerce style. */
 .woocommerce .order_details li:first-child {
     padding: 10px 2em 0 0;
 }
+
 /* Emphasize terms on checkout. */
 p.wc-terms-and-conditions, p.wc-terms-and-conditions a {
-	font-size: 18px !important;
-	font-weight: bold !important;
+    font-size: 18px !important;
+    font-weight: bold !important;
 }
+
 /* Anchors always matter. */
 span.wpcf7-list-item-label a {
-	font-size: 18px !important;
+    font-size: 18px !important;
 }
