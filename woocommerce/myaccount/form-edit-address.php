@@ -12,22 +12,19 @@
  * @see 	    http://docs.woothemes.com/document/template-structure/
  * @author      WooThemes
  * @package     WooCommerce/Templates
- * @version     2.1.0
+ * @version     2.6.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit;
 }
 
 $page_title   = ( $load_address === 'billing' ) ? __( 'Billing Address', 'woocommerce' ) : __( 'Shipping Address', 'woocommerce' );
-?>
 
-<?php wc_print_notices(); ?>
+do_action( 'woocommerce_before_edit_account_address_form' ); ?>
 
 <?php if ( ! $load_address ) : ?>
-
 	<?php wc_get_template( 'myaccount/my-address.php' ); ?>
-
 <?php else : ?>
 
 	<form method="post">
@@ -53,3 +50,5 @@ $page_title   = ( $load_address === 'billing' ) ? __( 'Billing Address', 'woocom
 	</form>
 
 <?php endif; ?>
+
+<?php do_action( 'woocommerce_after_edit_account_address_form' ); ?>

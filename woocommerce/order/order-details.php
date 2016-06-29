@@ -12,7 +12,7 @@
  * @see 	    http://docs.woothemes.com/document/template-structure/
  * @author  WooThemes
  * @package WooCommerce/Templates
- * @version 2.5.3
+ * @version 2.6.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -64,7 +64,7 @@ $show_customer_details = is_user_logged_in() && $order->get_user_id() === get_cu
 	</tfoot>
 </table>
 
-<!-- Refund by customer if possible. -->
+<!-- CUSTOM: Refund by customer if possible. -->
 <?php if ($order->status == 'completed'): ?>
 <h2>환불 정보</h2>
 <table class="shop_table order_details">
