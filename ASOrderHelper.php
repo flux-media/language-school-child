@@ -187,10 +187,7 @@ class ASOrderHelper
     public function on_order_complete($order_id)
     {
         $order = new WC_Order($order_id);
-        // $email = get_post_meta($order_id, '_billing_email', true);
-        // $name = get_post_meta($order_id, '_billing_last_name', true);
         $tel = get_post_meta($order_id, '_billing_phone', true);
-        // $amount = get_post_meta($order_id, '_order_total', true);
         $course_titles = '';
         foreach ($order->get_items() as $item) {
             $course_titles .= '<' . $item['name'] . '> ';
