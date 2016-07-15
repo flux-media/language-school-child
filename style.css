@@ -41,8 +41,13 @@ body, a {
 }
 
 .cmsmasters_learnpress_shortcode .lpr_course_post .cmsmasters_course_price {
-    background-color: #01a2a6;
+    background-color: #fe5969;
     color: white;
+}
+
+.cmsmasters_learnpress_shortcode .lpr_course_post .cmsmasters_course_price.original_price {
+    background-color: white;
+    color: #3d3d47;
 }
 
 .cmsmasters_img_link.preloader {
@@ -366,6 +371,25 @@ body, a {
     padding: 0 !important;
 }
 
+/* Menu to the right to the right */
+.header_mid .mid_nav_wrap {
+    float: left !important;
+}
+
+/* Jukhwa tongil */
+ul.navigation > li.menu-item.current-menu-item > a, ul.navigation > li > a:hover {
+    color: #fe5969 !important;
+}
+
+.lpr_course_post img.heyho {
+    border: 1px solid #909195;
+    border-bottom-width: 0;
+}
+
+.lpr_course_post .cmsmasters_cource_cat a {
+    color: #fe5969;
+}
+
 @media only screen and (max-width: 1024px) {
     html #header .header_mid .resp_mid_nav_wrap {
         display: none !important;
@@ -377,6 +401,10 @@ body, a {
 
     .cmsmasters_heading_wrap {
         margin-top: 0 !important;
+    }
+
+    .header_mid .mid_nav_wrap {
+        float: none !important;
     }
 }
 
@@ -420,11 +448,6 @@ span.line-through {
 
 .float-right {
     float: right;
-}
-
-.cmsmasters_learnpress_shortcode .lpr_course_post .cmsmasters_course_price.original_price {
-    background-color: white;
-    color: #3d3d47;
 }
 
 .cmsmasters_learnpress_shortcode .lpr_course_post .lpr_course_title {

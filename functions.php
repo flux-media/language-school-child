@@ -263,14 +263,14 @@ function my_woocommerce_learnpress($atts, $content = null)
                             $out .= '<div class="cmsmasters_course_price original_price"><span class="line-through">₩' . number_format($product->get_price_including_tax(1, $regular_price)) . "</span> →</div>";
                         }
                     } else {
-                        $out .= '<div class=\"cmsmasters_course_free\">무료</div>';
+                        $out .= '<div class="cmsmasters_course_price">무료</div>';
                     }
                 } else {
-                    $out .= '<div class="cmsmasters_course_free">마감</div>';
+                    $out .= '<div class="cmsmasters_course_price">마감</div>';
                 }
             } else {
                 if ($is_past) {
-                    $out .= '<div class="cmsmasters_course_free">완료</div>';
+                    $out .= '<div class="cmsmasters_course_price">완료</div>';
                 } else {
                     if ($product->stock > 0) {
                         if ($regular_price != 0) {
@@ -279,10 +279,10 @@ function my_woocommerce_learnpress($atts, $content = null)
                                 $out .= '<div class="cmsmasters_course_price original_price"><span class="line-through">₩' . number_format($product->get_price_including_tax(1, $regular_price)) . "</span> →</div>";
                             }
                         } else {
-                            $out .= '<div class=\"cmsmasters_course_free\">무료</div>';
+                            $out .= '<div class="cmsmasters_course_price">무료</div>';
                         }
                     } else {
-                        $out .= '<div class="cmsmasters_course_free">마감</div>';
+                        $out .= '<div class="cmsmasters_course_price">마감</div>';
                     }
                 }
             }
