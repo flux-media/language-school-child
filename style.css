@@ -433,7 +433,7 @@ span.line-through {
 
 .display-mobile {
     display: none;
-    visibility: none;
+    visibility: hidden;
 }
 
 @media only screen and (max-width: 540px) {
@@ -479,7 +479,7 @@ span.line-through {
 
 .hidden {
     display: none;
-    visibility: none;
+    visibility: hidden;
 }
 
 #learn_press_payment_form {
@@ -550,4 +550,23 @@ p.wc-terms-and-conditions, p.wc-terms-and-conditions a {
 /* Anchors always matter. */
 span.wpcf7-list-item-label a {
     font-size: 18px !important;
+}
+
+/* Avengerschool lecturers list */
+.as-lecturers-ul {
+    clear: both;
+}
+
+.as-lecturers-ul .as-lecturers-li {
+    float: left;
+    margin-left: 5px;
+    list-style: none;
+    padding: 0;
+}
+
+.as-lecturers-ul .as-lecturers-li:before {
+    content: '';
+    width: 0;
+    top: 0;
+    left: 0;
 }

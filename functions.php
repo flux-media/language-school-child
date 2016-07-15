@@ -11,39 +11,28 @@
 
 require_once(dirname(__FILE__) . '/avengerschool/ASProduct.php');
 require_once(dirname(__FILE__) . '/ASOrderHelper.php');
+require_once(dirname(__FILE__) . '/ASLecturers.php');
 
 add_action('after_setup_theme', 'child_theme_setup');
 function child_theme_setup()
 {
     load_child_theme_textdomain('language-school-child', get_stylesheet_directory() . '/');
-}
 
-// https://docs.woothemes.com/document/third-party-custom-theme-compatibility/
-add_action('after_setup_theme', 'woocommerce_support');
-function woocommerce_support()
-{
+    // https://docs.woothemes.com/document/third-party-custom-theme-compatibility/
     add_theme_support('woocommerce');
-}
 
-add_action('wp_enqueue_scripts', 'theme_enqueue_styles');
-function theme_enqueue_styles()
-{
-    wp_enqueue_style('parent-style', get_template_directory_uri() . '/style.css', array(), '1.0.1');
+    add_shortcode('woocommerce_learnpress', 'my_woocommerce_learnpress');
 }
 
 add_action('wp_enqueue_scripts', 'theme_enqueue_scripts');
 function theme_enqueue_scripts()
 {
+    wp_enqueue_style('parent-style', get_template_directory_uri() . '/style.css', array(), '1.0.1');
+
     wp_enqueue_script('masonry');
     wp_enqueue_script('imagesLoaded', get_stylesheet_directory_uri() . '/js/imagesloaded.pkgd.min.js', array('masonry'), false, true);
     wp_enqueue_script('jquery-ui', get_stylesheet_directory_uri() . '/js/jquery-ui.min.js', array('jquery'), false, true);
     wp_enqueue_script('child_script', get_stylesheet_directory_uri() . '/js/jquery.script.js', array('jquery'), '1.0.0', true);
-}
-
-add_action('after_setup_theme', 'my_child_shortcodes_setup');
-function my_child_shortcodes_setup()
-{
-    add_shortcode('woocommerce_learnpress', 'my_woocommerce_learnpress');
 }
 
 add_action('init', 'wpcodex_add_author_support_to_product');
