@@ -177,41 +177,40 @@ class ASLecturers
             $link = get_permalink() . '?' . $this->PARAM_CATEGORY . '=' . $category_slug . '&';
         }
 
-        echo '<div><ul>';
+        echo '<div class="jogger">';
 
         $min_page = max(1, $page - $this->HALF_NUM_PAGES_TO_DISPLAY);
         $max_page = min($num_pages, $page + $this->HALF_NUM_PAGES_TO_DISPLAY);
 
         if ($page != 1) {
-            echo '<li class="pagination-previous"><a href="' . $this->getPageLink($link, ($page - 1)) . '">« Previous Page</a></li>' . "\n";
+            echo '<a href="' . $this->getPageLink($link, ($page - 1)) . '">« Previous Page</a>' . "\n";
         }
         if ($min_page > 1) {
-            echo '<li><a href="' . $this->getPageLink($link, 1) . '">1</a></li>' . "\n";
+            echo '<a href="' . $this->getPageLink($link, 1) . '">1</a>' . "\n";
         }
         if ($min_page > 2) {
-            echo '<li class="pagination-omission">…</li>' . "\n";
+            echo '…' . "\n";
         }
         for ($i = $min_page; $i < $max_page + 1; $i++) {
-            $echo = '<li';
+            $echo = '<a href=" ' . $this->getPageLink($link, $i) . '"';
             if ($i == $page) {
-                $echo .= ' class="active" aria-label="Current page"';
+                $echo .= ' class="current" aria-label="Current page"';
             }
-            $echo .= '><a href="' . $this->getPageLink($link, $i) . '">' . $i . '</a></li>' . "\n";
+            $echo .= '>' . $i . '</a>' . "\n";
             echo $echo;
         }
 
         if ($max_page < $num_pages - 1) {
-            echo '<li class="pagination-omission">…</li>' . "\n";
+            echo '…' . "\n";
         }
         if ($max_page < $num_pages) {
-            echo '<li><a href="' . $this->getPageLink($link, $num_pages) . '">' . $num_pages . '</a>' . "\n";
+            echo '<a href="' . $this->getPageLink($link, $num_pages) . '">' . $num_pages . '</a>' . "\n";
         }
         if ($page != $num_pages) {
-            echo '<li class="pagination-next">' . "\n" .
-                '<a href="' . $this->getPageLink($link, ($page + 1)) . '">Next Page »</a></li>' . "\n";
+            echo '<a href="' . $this->getPageLink($link, ($page + 1)) . '">Next Page »</a>' . "\n";
         }
 
-        echo '</ul></div>';
+        echo '</div>';
     }
 
     /**
@@ -291,7 +290,7 @@ class ASLecturers
             echo '</div>';
 
             echo '<div class="entry-content">';
-            echo '대표강연: ' . '<a href=" ' . get_permalink($user->rep_lecture->ID) . ' ">' . $user->rep_lecture->post_title . '</a>';
+            echo '<span class="bold">대표강연</span>: ' . '<a href=" ' . get_permalink($user->rep_lecture->ID) . ' ">' . $user->rep_lecture->post_title . '</a>';
             echo '</div>';
 
             echo '</div>';
@@ -316,7 +315,8 @@ class ASLecturers
             $join = 'LEFT JOIN ' . $wpdb->term_relationships . ' AS tr ON p.ID = tr.object_id
                     LEFT JOIN ' . $wpdb->term_taxonomy . ' AS tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
                     LEFT JOIN ' . $wpdb->terms . ' AS t ON tt.term_id = t.term_id
-                  WHERE p.post_status = \'publish\' AND tt.taxonomy = \'' . $this->TAXONOMY . '\'
+                  WHERE p.post_status = \'publish\'
+                    AND tt.taxonomy = \'' . $this->TAXONOMY . '\'
                     AND t.slug = \'' . $category_slug . '\'
                     AND u.display_name != \'' . $this->AS_DISPLAY_NAME . '\'
                     AND um.meta_key = \'' . $this->REP_LECTURER_FIELD_ID . '\'';
@@ -331,7 +331,7 @@ class ASLecturers
             $limit = 'LIMIT ' . $this->PER_PAGE . '
             OFFSET ' . (intval($page) - 1) * intval($this->PER_PAGE);
         } else {
-            $innerSelect = '';
+            $innerSelect = 'u.display_name,';
             $limit = '';
         }
 

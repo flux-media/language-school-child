@@ -570,3 +570,34 @@ span.wpcf7-list-item-label a {
     top: 0;
     left: 0;
 }
+
+/*
+ Pagination
+ http://www.mis-algoritmos.com/some-styles-for-your-pagination
+ */
+div.jogger {
+    padding: 2px;
+    margin: 7px;
+}
+
+div.jogger a {
+    margin: 2px;
+    padding: 0.5em 0.64em 0.43em 0.64em;
+    background-color: #ee4e4e;
+    text-decoration: none; /* no underline */
+    color: #fff;
+}
+
+div.jogger a:hover, div.jogger a:active {
+    padding: 0.5em 0.64em 0.43em 0.64em;
+    margin: 2px;
+    background-color: #de1818;
+    color: #fff;
+}
+
+div.jogger a.current {
+    padding: 0.5em 0.64em 0.43em 0.64em;
+    margin: 2px;
+    background-color: #f6efcc;
+    color: #6d643c;
+}
