@@ -226,6 +226,9 @@ class ASLecturers
 
         echo '<li class="as-lecturers-li"><a href="' . get_permalink() . '">전체</a></li>';
         foreach ($terms as $term) {
+            if ($term->slug == 'package') {
+                continue;
+            }
             echo '<li class="as-lecturers-li">';
             echo '<a href=" ' . get_permalink() . '?' . $this->PARAM_CATEGORY . '=' . $term->slug . '">' . $term->name . '</a>';
             echo '</li>';
