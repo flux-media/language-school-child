@@ -222,6 +222,8 @@ class ASLecturers
     {
         echo '<ul class="as-lecturers-ul">';
 
+        echo '<li class="as-lecturers-li"><span class="bold">카테고리</span></li>';
+
         echo '<li class="as-lecturers-li"><a href="' . get_permalink() . '">전체</a></li>';
         foreach ($terms as $term) {
             echo '<li class="as-lecturers-li">';
