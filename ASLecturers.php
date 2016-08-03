@@ -1,5 +1,7 @@
 <?php
 
+defined('ABSPATH') or die('No script kiddies please!');
+
 /**
  * Displays a list of Avengerschool lecturers.
  *

@@ -191,6 +191,15 @@ function replaceUrlParam(url, paramName, paramValue) {
                     case 'SEO':
                         slug = 'seo';
                         break;
+                    case '애자일':
+                        slug = 'agile';
+                        break;
+                    case '스마트워크':
+                        slug = 'smartwork';
+                        break;
+                    case '사업':
+                        slug = 'work';
+                        break;
                 }
                 if (slug) {
                     parent.location.hash = '#' + slug;
@@ -235,7 +244,15 @@ function replaceUrlParam(url, paramName, paramValue) {
                     case 'writing':
                         slugInKorean = '글쓰기';
                         break;
-
+                    case 'agile':
+                        slugInKorean = '애자일';
+                        break;
+                    case 'smartwork':
+                        slugInKorean = '스마트워크';
+                        break;
+                    case 'work':
+                        slugInKorean = '사업';
+                        break;
                 }
                 $mainTabContainer.find('li>a').each(function () {
                     var $this = $(this), innerText = $.trim($this.text());
@@ -297,7 +314,7 @@ function replaceUrlParam(url, paramName, paramValue) {
             windowWidth = $window.width(),
             scrollTop = $window.scrollTop(),
             containerWidth = $('.middle_inner').width(),
-        // http://stackoverflow.com/questions/12749844/finding-the-position-of-bottom-of-a-div-with-jquery
+            // http://stackoverflow.com/questions/12749844/finding-the-position-of-bottom-of-a-div-with-jquery
             contentBottom = 170 + $content.outerHeight(true),
             sidebarHeight = $sidebar.height(),
             margin;
